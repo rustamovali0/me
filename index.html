@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="az" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Əli Rüstəmov | Rəqəmsal Vizit Kart</title>
+    
+    <!-- SEO və Sosial Şəbəkə Meta Teqləri -->
+    <meta name="description" content="Əli Rüstəmov şəxsi rəqəmsal vizit kartı. Sürətli əlaqə və sosial şəbəkələr.">
+    <meta name="keywords" content="Əli Rüstəmov, Əli, Rüstəmov, ru8tam0ff, Rəqəmsal Vizit Kart, Şəxsi Kart">
+    <meta name="author" content="Əli Rüstəmov">
+    
+    <meta property="og:title" content="Əli Rüstəmov | Rəqəmsal Vizit Kart">
+    <meta property="og:description" content="Mənimlə əlaqə qurmaq və nömrəmi yadda saxlamaq üçün ən rahat yol.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://card.rustamoff.site">
+    <meta property="og:image" content="https://icwpaipqqqwjpooazmcu.supabase.co/storage/v1/object/sign/logos/IMG_3732.webp?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV8xMjAzOTRmMy04ZjhmLTQwOTItYjA2Ny04ZDBmODZiOWE1OWEiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJsb2dvcy9JTUdfMzczMi53ZWJwIiwic2NvcGUiOiJkb3dubG9hZCIsImlhdCI6MTc4MjgxMDU4NywiZXhwIjoyMDk4MTcwNTg3fQ.o2SgZW9r9GJKgZ1hcD43-sMWc4uxQEvOUJQWzxnE6PU">
+
+    <!-- PWA və Mobil Optimallaşdırma -->
+    <meta name="theme-color" content="#09090b" id="theme-color-meta">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="apple-touch-icon" href="https://icwpaipqqqwjpooazmcu.supabase.co/storage/v1/object/sign/logos/IMG_3732.webp?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV8xMjAzOTRmMy04ZjhmLTQwOTItYjA2Ny04ZDBmODZiOWE1OWEiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJsb2dvcy9JTUdfMzczMi53ZWJwIiwic2NvcGUiOiJkb3dubG9hZCIsImlhdCI6MTc4MjgxMDU4NywiZXhwIjoyMDk4MTcwNTg3fQ.o2SgZW9r9GJKgZ1hcD43-sMWc4uxQEvOUJQWzxnE6PU">
+
+    <!-- Google Fonts (Inter) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Alpine.js CDN -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    
+    <!-- Font Awesome Ikonları -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Tailwind Konfiqurasiyası -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#f0f7ff',
+                            100: '#e0effe',
+                            200: '#bae0fd',
+                            300: '#7cc8fc',
+                            400: '#36abfa',
+                            500: '#0066cc', // Premium Apple/Stripe göyü
+                            600: '#0055b3',
+                            700: '#00448c',
+                            850: '#0a2540',
+                        },
+                        darkBg: '#08080a',
+                        darkCard: '#121215',
+                    },
+                    boxShadow: {
+                        'premium-light': '0 20px 40px -15px rgba(0,102,204,0.06)',
+                        'premium-dark': '0 30px 60px -15px rgba(0,0,0,0.6)',
+                        'glass-light': '0 8px 32px 0 rgba(31, 38, 135, 0.04)',
+                        'glass-dark': '0 8px 32px 0 rgba(0, 0, 0, 0.5)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Glassmorphism və Animasiya CSS effektləri -->
+    <style>
+        body {
+            -webkit-tap-highlight-color: transparent;
+        }
+        .glass-panel-light {
+            background: rgba(255, 255, 255, 0.65);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+        }
+        .glass-panel-dark {
+            background: rgba(18, 18, 21, 0.6);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.03);
+        }
+        
+        /* Animasiyalı premium arxa plan orbları (Stripe-style) */
+        .orb-gradient-1 {
+            background: radial-gradient(circle, rgba(0, 102, 204, 0.15) 0%, rgba(2, 118, 247, 0) 70%);
+            animation: float-orb-1 25s infinite alternate ease-in-out;
+        }
+        .orb-gradient-2 {
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.12) 0%, rgba(99, 102, 241, 0) 0%);
+            animation: float-orb-2 30s infinite alternate ease-in-out;
+        }
+        
+        @keyframes float-orb-1 {
+            0% { transform: translate(-30%, -20%) scale(1); }
+            100% { transform: translate(20%, 30%) scale(1.4); }
+        }
+        @keyframes float-orb-2 {
+            0% { transform: translate(40%, 20%) scale(1.2); }
+            100% { transform: translate(-20%, -30%) scale(0.8); }
+        }
+    </style>
+</head>
+
+<body x-data="cardApp()" :class="{ 'dark': darkMode }" class="relative min-h-screen text-slate-800 dark:text-slate-200 transition-colors duration-500 bg-[#fbfbfd] dark:bg-[#060608] overflow-x-hidden font-sans antialiased">
+
+    <!-- Arxa fondakı premium, dinamik hərəkət edən gradient blobs -->
+    <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+        <div class="absolute -top-[20%] -left-[20%] w-[100%] h-[100%] rounded-full orb-gradient-1 filter blur-[80px]"></div>
+        <div class="absolute -bottom-[20%] -right-[20%] w-[100%] h-[100%] rounded-full orb-gradient-2 filter blur-[80px]"></div>
+    </div>
+
+    <!-- ƏSAS MOBİL KONTEYNER (Maksimum enlik 450px, mobil üçün çox yığcam) -->
+    <div class="relative z-10 max-w-md mx-auto px-5 pt-6 pb-20 min-h-screen flex flex-col justify-between">
+        
+        <!-- ÜST NAVİQASİYA BAR -->
+        <header class="flex justify-between items-center w-full mb-8 z-30">
+            <!-- Sol tərəfdə rustamoff.site Veb sayt keçidi -->
+            <a href="https://rustamoff.site" target="_blank" class="flex items-center space-x-1.5 bg-brand-500/10 text-brand-500 dark:text-brand-400 px-3.5 py-2 rounded-xl text-xs font-bold border border-brand-500/20 shadow-sm backdrop-blur-sm hover:bg-brand-500 hover:text-white transition-all duration-300">
+                <i class="fa-solid fa-globe text-[11px]"></i>
+                <span>rustamoff.site</span>
+            </a>
+
+            <div class="flex items-center space-x-2.5">
+                <!-- QR Kod Düyməsi -->
+                <button @click="showQrModal = true" class="p-2.5 rounded-xl transition-all duration-300 bg-white/60 dark:bg-zinc-900/60 border border-zinc-200/40 dark:border-zinc-800/40 text-slate-600 dark:text-slate-300 hover:scale-105 hover:bg-white dark:hover:bg-zinc-900 active:scale-95 shadow-sm" aria-label="QR Kodu göstər">
+                    <i class="fa-solid fa-qrcode text-[16px]"></i>
+                </button>
+                
+                <!-- Dark Mode Düyməsi -->
+                <button @click="toggleTheme()" class="p-2.5 rounded-xl transition-all duration-300 bg-white/60 dark:bg-zinc-900/60 border border-zinc-200/40 dark:border-zinc-800/40 text-slate-600 dark:text-slate-300 hover:scale-105 hover:bg-white dark:hover:bg-zinc-900 active:scale-95 shadow-sm" aria-label="Görünüş rejimini dəyiş">
+                    <i :class="darkMode ? 'fa-solid fa-sun text-amber-400' : 'fa-solid fa-moon text-brand-500'" class="text-[16px]"></i>
+                </button>
+
+                <!-- Paylaşım Düyməsi -->
+                <button @click="shareCard()" class="p-2.5 rounded-xl transition-all duration-300 bg-white/60 dark:bg-zinc-900/60 border border-zinc-200/40 dark:border-zinc-800/40 text-slate-600 dark:text-slate-300 hover:scale-105 hover:bg-white dark:hover:bg-zinc-900 active:scale-95 shadow-sm" aria-label="Kartı paylaş">
+                    <i class="fa-solid fa-share-nodes text-[16px]"></i>
+                </button>
+            </div>
+        </header>
+
+        <!-- HERO BÖLMƏSİ (PROFIL) -->
+        <section class="flex flex-col items-center text-center mb-8">
+            <!-- Profil Şəkli (Premium Glow və İncə Çərçivə) -->
+            <div class="relative mb-5">
+                <div class="absolute inset-0 bg-gradient-to-tr from-brand-500 to-indigo-500 rounded-full blur-xl opacity-25 dark:opacity-45 animate-pulse"></div>
+                <div class="relative p-1.5 rounded-full bg-white/70 dark:bg-zinc-900/70 border border-zinc-200/40 dark:border-zinc-800/40 shadow-2xl">
+                    <img :src="cardData.profile.avatar" :alt="cardData.profile.name" class="w-32 h-32 sm:w-36 sm:h-36 rounded-full object-cover border-4 border-white/90 dark:border-[#0d0d10]" onerror="this.onerror=null; this.src='https://placehold.co/400x400/0066cc/ffffff?text=Ali+Rustamov'">
+                    <!-- Verified Nişanı -->
+                    <div class="absolute bottom-2 right-2 bg-brand-500 text-white rounded-full p-1.5 border-2 border-white dark:border-[#0d0d10] shadow-md flex items-center justify-center">
+                        <i class="fa-solid fa-check text-[11px]"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ad, Soyad & Şəxsi Vəzifə -->
+            <div class="space-y-1.5 max-w-sm">
+                <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-slate-900 dark:text-white" x-text="cardData.profile.name"></h1>
+                <p class="text-xs sm:text-sm font-semibold text-brand-500 dark:text-brand-400 tracking-wider uppercase" x-text="cardData.profile.title"></p>
+                <p class="text-xs sm:text-sm text-slate-500 dark:text-zinc-400 max-w-xs mx-auto pt-1 leading-relaxed" x-text="cardData.profile.shortBio"></p>
+            </div>
+
+            <!-- Əsas CTA Düymələr -->
+            <div class="grid grid-cols-2 gap-3.5 w-full mt-7">
+                <!-- Əlaqə saxla (Sürətli Scroll) -->
+                <a href="#elaqe" class="flex items-center justify-center space-x-2 py-3.5 px-4 rounded-2xl font-bold bg-brand-500 text-white shadow-lg shadow-brand-500/20 hover:bg-brand-600 hover:shadow-brand-500/30 active:scale-[0.98] transition-all duration-300">
+                    <i class="fa-regular fa-paper-plane text-[14px]"></i>
+                    <span class="text-xs sm:text-sm">Əlaqə saxla</span>
+                </a>
+                
+                <!-- Kontakta əlavə et (Dinamik vCard faylı yükləmə) -->
+                <button @click="downloadVCard()" class="flex items-center justify-center space-x-2 py-3.5 px-4 rounded-2xl font-bold bg-white/70 dark:bg-zinc-950/70 border border-zinc-200/50 dark:border-zinc-800/50 text-slate-800 dark:text-slate-200 shadow-sm hover:bg-white dark:hover:bg-zinc-900 active:scale-[0.98] transition-all duration-300">
+                    <i class="fa-solid fa-user-plus text-[14px]"></i>
+                    <span class="text-xs sm:text-sm">Yadda saxla</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- ƏLAQƏ BÖLMƏSİ (Məlumat Kartları - Birbaşa Click Olunur) -->
+        <section id="elaqe" class="mb-6 scroll-mt-6">
+            <h2 class="text-[11px] font-bold tracking-widest text-slate-400 dark:text-zinc-500 uppercase mb-3.5 ml-1">Əlaqə Məlumatları</h2>
+            <div class="grid grid-cols-1 gap-2.5">
+                <template x-for="contact in cardData.contacts" :key="contact.id">
+                    <a :href="contact.href" 
+                       class="flex items-center justify-between p-3.5 rounded-2xl transition-all duration-300 hover:scale-[1.01] active:scale-[0.99] shadow-premium-light dark:shadow-premium-dark block cursor-pointer"
+                       :class="darkMode ? 'glass-panel-dark' : 'glass-panel-light'">
+                        <div class="flex items-center space-x-3.5 overflow-hidden">
+                            <!-- Premium İkon Dairəsi -->
+                            <div class="p-3 rounded-xl flex items-center justify-center text-white w-10 h-10 shadow-sm" :class="contact.colorClass">
+                                <i :class="contact.icon" class="text-[14px]"></i>
+                            </div>
+                            <div class="flex flex-col text-left overflow-hidden">
+                                <span class="text-[9px] font-semibold tracking-wider text-slate-400 dark:text-zinc-500 uppercase" x-text="contact.label"></span>
+                                <span class="text-[13px] sm:text-sm font-semibold text-slate-800 dark:text-slate-100 mt-0.5 truncate max-w-[210px] sm:max-w-[240px]" x-text="contact.value"></span>
+                            </div>
+                        </div>
+                        
+                        <!-- Kopyalama Düyməsi (Yönləndirməni dayandıraraq) -->
+                        <div class="flex items-center" @click.prevent.stop>
+                            <button @click.prevent.stop="copyToClipboard(contact.value, contact.label)" class="p-2 rounded-lg text-slate-400 hover:text-slate-600 dark:text-zinc-500 dark:hover:text-zinc-300 transition-colors" title="Kopyala">
+                                <i class="fa-regular fa-copy text-[14px]"></i>
+                            </button>
+                        </div>
+                    </a>
+                </template>
+            </div>
+        </section>
+
+        <!-- SOSİAL ŞƏBƏKƏLƏR (WhatsApp daxil olmaqla) -->
+        <section class="mb-8">
+            <h2 class="text-[11px] font-bold tracking-widest text-slate-400 dark:text-zinc-500 uppercase mb-3.5 ml-1">Sosial Şəbəkələr</h2>
+            <div class="grid grid-cols-3 gap-2.5">
+                <template x-for="social in cardData.socials" :key="social.name">
+                    <a :href="social.href" target="_blank" class="flex flex-col items-center justify-center p-3 rounded-2xl transition-all duration-300 hover:scale-105 active:scale-95 text-center group shadow-premium-light dark:shadow-premium-dark"
+                       :class="darkMode ? 'glass-panel-dark' : 'glass-panel-light'">
+                        <div class="w-10 h-10 rounded-full flex items-center justify-center mb-1.5 transition-all duration-500 group-hover:scale-110 shadow-sm text-white" :class="social.colorClass">
+                            <i :class="social.icon" class="text-[15px]"></i>
+                        </div>
+                        <span class="text-[9px] font-semibold text-slate-500 dark:text-zinc-400 truncate w-full" x-text="social.name"></span>
+                    </a>
+                </template>
+            </div>
+        </section>
+
+        <!-- FOOTER -->
+        <footer class="text-center space-y-2 mt-auto pt-6 border-t border-slate-200/40 dark:border-zinc-800/40">
+            <p class="text-xs text-slate-400 dark:text-zinc-500 font-medium">
+                &copy; 2026 Rustamoff. Bütün hüquqlar qorunur.
+            </p>
+            <div class="flex items-center justify-center space-x-1.5 text-[11px] text-slate-400/80 dark:text-zinc-600">
+                <i class="fa-solid fa-shield-halved text-[10px]"></i>
+                <span>Premium Şəxsi Vizit Kartı</span>
+            </div>
+        </footer>
+    </div>
+
+    <!-- TOAST (iOS TIPI MINI BİLDİRİŞ PANELİ) -->
+    <div class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 pointer-events-none w-full max-w-xs px-4"
+         x-show="toast.show" 
+         x-transition:enter="transition ease-out duration-300"
+         x-transition:enter-start="opacity-0 translate-y-4 scale-95"
+         x-transition:enter-end="opacity-100 translate-y-0 scale-100"
+         x-transition:leave="transition ease-in duration-200"
+         x-transition:leave-start="opacity-100 translate-y-0 scale-100"
+         x-transition:leave-end="opacity-0 translate-y-4 scale-95"
+         style="display: none;">
+        <div class="flex items-center space-x-2.5 py-3 px-4 rounded-2xl shadow-xl backdrop-blur-md bg-zinc-900/90 dark:bg-white/95 text-white dark:text-slate-950 border border-white/10 dark:border-zinc-200/50 text-xs font-semibold">
+            <div class="w-5 h-5 rounded-full bg-brand-500 text-white flex items-center justify-center text-[10px]">
+                <i class="fa-solid fa-check"></i>
+            </div>
+            <span x-text="toast.message"></span>
+        </div>
+    </div>
+
+    <!-- QR KOD MODAL (GLASSMORPHISM POPUP) -->
+    <div class="fixed inset-0 z-50 flex items-center justify-center p-4" 
+         x-show="showQrModal" 
+         style="display: none;">
+        
+        <!-- Arxa fon qaraltması -->
+        <div class="fixed inset-0 bg-black/60 backdrop-blur-sm transition-opacity" @click="showQrModal = false"></div>
+        
+        <!-- Modal pəncərəsi -->
+        <div class="relative w-full max-w-sm rounded-3xl p-6 text-center shadow-2xl overflow-hidden transition-all transform z-10"
+             :class="darkMode ? 'glass-panel-dark' : 'glass-panel-light'"
+             x-show="showQrModal"
+             x-transition:enter="transition ease-out duration-300"
+             x-transition:enter-start="opacity-0 scale-95"
+             x-transition:enter-end="opacity-100 scale-100"
+             x-transition:leave="transition ease-in duration-200"
+             x-transition:leave-start="opacity-100 scale-100"
+             x-transition:leave-end="opacity-0 scale-95">
+            
+            <!-- Bağla düyməsi -->
+            <button @click="showQrModal = false" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-slate-100 dark:bg-zinc-800 flex items-center justify-center text-slate-500 hover:text-slate-800 dark:hover:text-white transition-colors">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <h3 class="text-base font-bold text-slate-900 dark:text-white mb-1.5">Vizit Kartı Paylaş</h3>
+            <p class="text-xs text-slate-500 dark:text-zinc-400 mb-5">QR kodu skan edərək şəxsi vizit kartımı birbaşa öz mobil cihazınızda aça bilərsiniz.</p>
+
+            <!-- QR Kod sahəsi -->
+            <div class="mx-auto w-48 h-48 bg-white p-3 rounded-2xl flex items-center justify-center shadow-inner border border-slate-100">
+                <img :src="'https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=' + encodeURIComponent(window.location.origin || 'https://card.rustamoff.site')" 
+                     alt="Ali Rustamov QR Code" 
+                     class="w-full h-full object-contain">
+            </div>
+
+            <p class="text-xs font-bold text-brand-500 dark:text-brand-400 mt-4 tracking-wide">card.rustamoff.site</p>
+
+            <div class="mt-6 grid grid-cols-2 gap-2.5">
+                <!-- QR Linkini kopyala -->
+                <button @click="copyToClipboard(window.location.origin || 'https://card.rustamoff.site', 'Link'); showQrModal = false" class="flex items-center justify-center space-x-1.5 py-2.5 rounded-xl text-xs font-bold bg-slate-100 dark:bg-zinc-800 text-slate-700 dark:text-slate-200 hover:bg-slate-200 dark:hover:bg-zinc-700 transition-colors">
+                    <i class="fa-solid fa-link text-[11px]"></i>
+                    <span>Linki kopyala</span>
+                </button>
+                <!-- QR Kodu yüklə -->
+                <a :href="'https://api.qrserver.com/v1/create-qr-code/?size=500x500&data=' + encodeURIComponent(window.location.origin || 'https://card.rustamoff.site')" download="ali_rustamov_qr.png" target="_blank" class="flex items-center justify-center space-x-1.5 py-2.5 rounded-xl text-xs font-bold bg-brand-500 text-white hover:bg-brand-600 transition-colors">
+                    <i class="fa-solid fa-download text-[11px]"></i>
+                    <span>QR Kodu yüklə</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ALPINJS TƏTBİQ SKRİPTİ -->
+    <script>
+        function cardApp() {
+            return {
+                darkMode: true,
+                showQrModal: false,
+                toast: {
+                    show: false,
+                    message: ''
+                },
+                
+                // Şəxsi profil və kontakt məlumatları
+                cardData: {
+                    profile: {
+                        name: "Əli Rüstəmov",
+                        title: "Şəxsi Rəqəmsal Kart",
+                        shortBio: "Mənimlə əlaqə saxlamaq, nömrəmi yadda saxlamaq və sosial şəbəkələrdə izləmək üçün ən rahat yol.",
+                        avatar: "https://icwpaipqqqwjpooazmcu.supabase.co/storage/v1/object/sign/logos/IMG_3732.webp?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV8xMjAzOTRmMy04ZjhmLTQwOTItYjA2Ny04ZDBmODZiOWE1OWEiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJsb2dvcy9JTUdfMzczMi53ZWJwIiwic2NvcGUiOiJkb3dubG9hZCIsImlhdCI6MTc4MjgxMDU4NywiZXhwIjoyMDk4MTcwNTg3fQ.o2SgZW9r9GJKgZ1hcD43-sMWc4uxQEvOUJQWzxnE6PU"
+                    },
+                    contacts: [
+                        { id: "azercell", label: "Azercell", value: "077-331-33-27", href: "tel:+994773313327", icon: "fa-solid fa-phone", colorClass: "bg-gradient-to-tr from-[#5a31f4] to-[#7f5af0]" },
+                        { id: "email", label: "E-poçt", value: "me@rustamoff.site", href: "mailto:me@rustamoff.site", icon: "fa-regular fa-envelope", colorClass: "bg-gradient-to-tr from-rose-500 to-red-400" }
+                    ],
+                    socials: [
+                        { name: "WhatsApp", href: "https://wa.me/994773313327", icon: "fa-brands fa-whatsapp", colorClass: "bg-gradient-to-tr from-emerald-500 to-green-400" },
+                        { name: "Instagram", href: "https://www.instagram.com/ru8tam0ff/", icon: "fa-brands fa-instagram", colorClass: "bg-gradient-to-tr from-yellow-500 via-pink-500 to-purple-600" },
+                        { name: "Telegram", href: "https://t.me/ru8tam0ff", icon: "fa-solid fa-paper-plane", colorClass: "bg-[#229ED9]" }
+                    ]
+                },
+
+                // Tətbiqi işə salma və sistem parametrlərini yoxlama
+                init() {
+                    const isDark = localStorage.getItem('theme') === 'dark' || 
+                        (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches);
+                    this.darkMode = isDark;
+                    this.updateThemeMeta();
+                },
+
+                // Dark/Light mövzu dəyişdirilməsi
+                toggleTheme() {
+                    this.darkMode = !this.darkMode;
+                    localStorage.setItem('theme', this.darkMode ? 'dark' : 'light');
+                    this.updateThemeMeta();
+                    this.showToast(this.darkMode ? 'Qaranlıq rejim aktiv edildi' : 'Aydınlıq rejim aktiv edildi');
+                },
+
+                updateThemeMeta() {
+                    const metaColor = document.getElementById('theme-color-meta');
+                    if (metaColor) {
+                        metaColor.setAttribute('content', this.darkMode ? '#08080a' : '#f5f5f7');
+                    }
+                },
+
+                // Kopyalama metodu (İnteqrasiya edilmiş təhlükəsiz clipboard daxili metodu)
+                copyToClipboard(text, label) {
+                    const el = document.createElement('textarea');
+                    el.value = text;
+                    document.body.appendChild(el);
+                    el.select();
+                    document.execCommand('copy');
+                    document.body.removeChild(el);
+                    this.showToast(`${label} kopyalandı!`);
+                },
+
+                // Toast bildiriş paneli
+                showToast(message) {
+                    this.toast.message = message;
+                    this.toast.show = true;
+                    setTimeout(() => {
+                        this.toast.show = false;
+                    }, 2500);
+                },
+
+                // Dinamik vCard kontakt faylı generatoru
+                downloadVCard() {
+                    const name = this.cardData.profile.name;
+                    const email = this.cardData.contacts.find(c => c.id === 'email')?.value || '';
+                    const url = window.location.origin || 'https://card.rustamoff.site';
+
+                    const vCardContent = [
+                        "BEGIN:VCARD",
+                        "VERSION:3.0",
+                        `N:Rüstəmov;Əli;;;`,
+                        `FN:${name}`,
+                        `TITLE:Şəxsi Rəqəmsal Kart`,
+                        `TEL;TYPE=CELL,VOICE;type=pref:+994773313327`, // Azercell
+                        `EMAIL;TYPE=PREF,INTERNET:${email}`,
+                        `URL:${url}`,
+                        "END:VCARD"
+                    ].join("\n");
+
+                    const blob = new Blob([vCardContent], { type: 'text/vcard;charset=utf-8;' });
+                    const blobUrl = URL.createObjectURL(blob);
+                    
+                    const downloadLink = document.createElement('a');
+                    downloadLink.href = blobUrl;
+                    downloadLink.download = `Eli_Rustemov_kontakt.vcf`;
+                    document.body.appendChild(downloadLink);
+                    downloadLink.click();
+                    document.body.removeChild(downloadLink);
+                    
+                    this.showToast("Kontakt telefona yükləndi!");
+                },
+
+                // Sosial media və ya vizit kart paylaşımı (Web Share API və ya default kopyalama)
+                shareCard() {
+                    const shareData = {
+                        title: this.cardData.profile.name,
+                        text: this.cardData.profile.title,
+                        url: window.location.href
+                    };
+
+                    if (navigator.share) {
+                        navigator.share(shareData)
+                            .then(() => this.showToast("Müvəffəqiyyətlə paylaşıldı"))
+                            .catch((err) => console.log('Paylaşım ləğv edildi', err));
+                    } else {
+                        this.copyToClipboard(window.location.href, "Vizit kart linki");
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+</html>
