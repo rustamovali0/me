@@ -105,7 +105,7 @@
 
 <body x-data="executiveCard()" class="min-h-screen overflow-x-hidden font-sans antialiased">
     <main class="relative min-h-screen px-4 py-4 sm:px-6 lg:px-8 lg:py-3">
-        <div class="mx-auto flex min-h-[calc(100vh-1rem)] w-full max-w-5xl flex-col">
+        <div class="mx-auto flex min-h-[calc(100vh-1rem)] w-full max-w-6xl flex-col">
             <header class="mb-3 flex items-center justify-between gap-3">
                 <a href="https://rustamoff.site" target="_blank" class="inline-flex stable-button items-center gap-2 rounded-full border border-executive/15 bg-white/65 px-4 text-xs font-extrabold text-executive shadow-sm transition hover:border-executive/35 hover:bg-white">
                     <i class="fa-solid fa-briefcase text-[12px] text-copper"></i>
@@ -122,7 +122,12 @@
                 </div>
             </header>
 
-            <section class="grid items-start gap-4 lg:grid-cols-[1.02fr_0.98fr]">
+            <section class="grid items-start gap-4 lg:grid-cols-[0.82fr_1fr_0.98fr]">
+                <div class="portrait-frame relative min-h-[300px] overflow-hidden rounded-[1.75rem] bg-ink shadow-executive sm:min-h-[320px] lg:min-h-[255px]">
+                    <img :src="cardData.profile.avatar" :alt="cardData.profile.name" class="absolute inset-0 h-full w-full object-cover object-center opacity-95" @error="handleAvatarError($event)">
+                    <div class="absolute inset-0 bg-gradient-to-t from-ink via-ink/25 to-transparent"></div>
+                </div>
+
                 <div class="executive-panel rounded-[1.75rem] p-5 sm:p-6 lg:p-6">
                     <div class="max-w-2xl">
                         <h1 class="ink-text text-[2.35rem] font-black leading-[0.95] text-ink sm:text-5xl lg:text-[3.45rem]" x-text="cardData.profile.name"></h1>
@@ -141,12 +146,7 @@
                     </div>
                 </div>
 
-                <aside class="grid gap-3">
-                    <div class="portrait-frame relative min-h-[300px] overflow-hidden rounded-[1.75rem] bg-ink shadow-executive sm:min-h-[320px] lg:min-h-[245px]">
-                        <img :src="cardData.profile.avatar" :alt="cardData.profile.name" class="absolute inset-0 h-full w-full object-cover object-center opacity-95" @error="handleAvatarError($event)">
-                        <div class="absolute inset-0 bg-gradient-to-t from-ink via-ink/25 to-transparent"></div>
-                    </div>
-
+                <aside>
                     <div id="contact" class="executive-panel rounded-[1.75rem] p-4 scroll-mt-5">
                         <div class="mb-2.5 flex items-center justify-between">
                             <h2 class="text-[11px] font-black text-ink/45">ƏLAQƏ</h2>
