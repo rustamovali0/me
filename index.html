@@ -125,9 +125,9 @@
             </header>
 
             <section class="grid items-start gap-5 lg:grid-cols-[0.92fr_1.08fr]">
-                <div class="portrait-frame relative min-h-[300px] overflow-hidden rounded-[1.75rem] bg-white shadow-executive sm:min-h-[320px] lg:min-h-[520px]">
+                <div class="portrait-frame relative min-h-[300px] overflow-hidden rounded-[1.75rem] bg-gradient-to-b from-white via-white to-ink shadow-executive sm:min-h-[320px] lg:min-h-[520px]">
                     <img :src="cardData.profile.avatar" :alt="cardData.profile.name" class="absolute inset-3 h-[calc(100%-1.5rem)] w-[calc(100%-1.5rem)] object-contain object-top opacity-95" @error="handleAvatarError($event)">
-                    <div class="absolute inset-x-0 bottom-0 h-1/5 bg-gradient-to-t from-ink/20 via-ink/5 to-transparent"></div>
+                    <div class="absolute inset-0 bg-gradient-to-b from-white/10 via-transparent to-ink/75"></div>
                 </div>
 
                 <div class="grid gap-5">
