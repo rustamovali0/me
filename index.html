@@ -182,6 +182,34 @@
                             </template>
                         </div>
                     </div>
+
+                    <form @submit.prevent="sendContactMessage()" class="executive-panel rounded-[1.75rem] p-4 lg:p-5">
+                        <div class="mb-3 flex items-center gap-3">
+                            <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-executive text-white">
+                                <i class="fa-regular fa-message text-[14px]"></i>
+                            </span>
+                            <div class="min-w-0 text-left">
+                                <h2 class="text-[11px] font-black text-ink/45">MESAJ YAZ</h2>
+                                <p class="mt-0.5 text-xs font-semibold text-ink/50">Mesajınız kemer.store Telegram bildirişinə düşəcək.</p>
+                            </div>
+                        </div>
+                        <textarea
+                            x-model="contactMessage"
+                            :disabled="messageSending"
+                            maxlength="900"
+                            placeholder="Mesajınızı yazın..."
+                            class="min-h-28 w-full resize-y rounded-2xl border border-executive/10 bg-white/65 px-3.5 py-3 text-sm font-semibold text-ink outline-none transition placeholder:text-ink/35 focus:border-executive/35 disabled:opacity-60"></textarea>
+                        <div class="mt-3 flex items-center justify-between gap-3">
+                            <p class="min-h-5 text-[11px] font-semibold" :class="messageStatusType === 'error' ? 'text-signal' : 'text-ink/45'" x-text="messageStatus"></p>
+                            <button
+                                type="submit"
+                                :disabled="messageSending"
+                                class="stable-button inline-flex min-w-28 items-center justify-center gap-2 rounded-2xl bg-executive px-4 text-xs font-black text-white transition hover:bg-[#0c2d28] active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-60">
+                                <i :class="messageSending ? 'fa-solid fa-spinner fa-spin' : 'fa-solid fa-paper-plane'" class="text-[11px]"></i>
+                                <span x-text="messageSending ? 'Göndərilir' : 'Göndər'"></span>
+                            </button>
+                        </div>
+                    </form>
                 </div>
             </section>
 
@@ -252,6 +280,9 @@
     </div>
 
     <script>
+        const KEMER_MESSAGE_FUNCTION_URL = 'https://icwpaipqqqwjpooazmcu.supabase.co/functions/v1/send-footer-message';
+        const KEMER_SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_W5rnAxonO_Sq-EnCdlFU7Q_mkmi37yJ';
+
         function executiveCard() {
             const fallbackUrl = 'https://me-virid-theta.vercel.app';
 
@@ -261,6 +292,10 @@
                     show: false,
                     message: ''
                 },
+                contactMessage: '',
+                messageSending: false,
+                messageStatus: '',
+                messageStatusType: 'idle',
                 profileUrl: window.location.origin && window.location.origin !== 'null' ? window.location.origin : fallbackUrl,
                 profileUrlLabel: 'Şəxsi profil linki',
                 cardData: {
@@ -302,6 +337,52 @@
                     setTimeout(() => {
                         this.toast.show = false;
                     }, 2500);
+                },
+
+                async sendContactMessage() {
+                    const message = this.contactMessage.trim().slice(0, 900);
+                    if (!message) {
+                        this.messageStatus = 'Mesaj yazın.';
+                        this.messageStatusType = 'error';
+                        return;
+                    }
+
+                    this.messageSending = true;
+                    this.messageStatus = '';
+                    this.messageStatusType = 'idle';
+
+                    try {
+                        const response = await fetch(KEMER_MESSAGE_FUNCTION_URL, {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                apikey: KEMER_SUPABASE_PUBLISHABLE_KEY,
+                                authorization: `Bearer ${KEMER_SUPABASE_PUBLISHABLE_KEY}`
+                            },
+                            body: JSON.stringify({
+                                source: 'me-vizitkart',
+                                message,
+                                page_path: `${window.location.pathname}${window.location.hash || ''}`,
+                                user_agent: navigator.userAgent
+                            })
+                        });
+
+                        const result = await response.json().catch(() => ({}));
+                        if (!response.ok) {
+                            throw new Error(result.error || 'Mesaj göndərilmədi.');
+                        }
+
+                        this.contactMessage = '';
+                        this.messageStatus = 'Mesaj göndərildi.';
+                        this.messageStatusType = 'success';
+                        this.showToast('Mesaj göndərildi!');
+                    } catch (error) {
+                        const errorMessage = error instanceof Error ? error.message : 'Mesaj göndərilmədi.';
+                        this.messageStatus = errorMessage.includes('Brutforce') ? 'Brutforce detected' : errorMessage;
+                        this.messageStatusType = 'error';
+                    } finally {
+                        this.messageSending = false;
+                    }
                 },
 
                 qrCodeUrl(size = 600) {
