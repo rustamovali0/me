@@ -108,6 +108,50 @@
             background: conic-gradient(from 140deg, transparent, rgba(216,192,138,.45), transparent, rgba(13,47,43,.65), transparent);
             animation: slow-spin 12s linear infinite;
         }
+        .brand-card {
+            background:
+                radial-gradient(circle at 24% 28%, rgba(216,192,138,.16), transparent 18%),
+                linear-gradient(135deg, rgba(255,255,255,.055), transparent 26%),
+                linear-gradient(145deg, #11100e 0%, #080706 55%, #17140f 100%);
+            border: 1px solid rgba(216,192,138,.52);
+            box-shadow: 0 34px 80px -48px rgba(0,0,0,.95), inset 0 1px 0 rgba(255,255,255,.12);
+        }
+        .brand-pattern {
+            background-image:
+                linear-gradient(30deg, rgba(216,192,138,.08) 12%, transparent 12.5%, transparent 87%, rgba(216,192,138,.08) 87.5%, rgba(216,192,138,.08)),
+                linear-gradient(150deg, rgba(216,192,138,.08) 12%, transparent 12.5%, transparent 87%, rgba(216,192,138,.08) 87.5%, rgba(216,192,138,.08));
+            background-size: 48px 84px;
+            opacity: .28;
+        }
+        .card-edge {
+            clip-path: polygon(0 0, 42% 0, 45% 100%, 55% 100%, 58% 0, 100% 0, 100% 100%, 0 100%);
+        }
+        .qr-frame {
+            background:
+                linear-gradient(#d8c08a, #d8c08a) padding-box,
+                linear-gradient(135deg, #fff4cf, #9f7d33) border-box;
+            border: 3px solid transparent;
+        }
+        .phone-frame {
+            background: linear-gradient(145deg, #090909, #222);
+            border: 8px solid #151515;
+            box-shadow: inset 0 0 0 2px rgba(255,255,255,.08), 0 28px 70px -42px rgba(0,0,0,.9);
+        }
+        .phone-notch {
+            left: 50%;
+            transform: translateX(-50%);
+            background: #050505;
+            border-bottom-left-radius: 18px;
+            border-bottom-right-radius: 18px;
+        }
+        .gold-divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(216,192,138,.95), transparent);
+        }
+        .feature-tile {
+            background: linear-gradient(145deg, rgba(255,255,255,.06), rgba(255,255,255,.018));
+            border: 1px solid rgba(216,192,138,.16);
+        }
         @keyframes slow-spin { to { transform: rotate(360deg); } }
         @media (prefers-reduced-motion: reduce) {
             * { animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; }
@@ -122,6 +166,8 @@
             .mobile-chip { padding: .55rem .65rem; }
             .mobile-chip span:first-child { font-size: .78rem; }
             .mobile-action { min-height: 46px; border-radius: 1rem; }
+            .mobile-business-card { aspect-ratio: auto !important; min-height: 29rem; width: 100%; min-width: 0; }
+            .mobile-phone { max-width: 14.25rem; }
         }
     </style>
 </head>
@@ -133,142 +179,297 @@
         <div class="absolute inset-x-0 bottom-0 h-52 bg-gradient-to-t from-black via-black/70 to-transparent"></div>
     </div>
 
-    <main class="mobile-shell safe-bottom relative z-10 mx-auto flex min-h-screen w-full max-w-6xl flex-col px-4 py-5 sm:px-6 lg:px-8">
-        <header class="mb-3 flex items-center justify-between gap-3 sm:mb-5">
-            <a href="https://rustamoff.site" target="_blank" class="stable-button inline-flex items-center gap-2 rounded-2xl border border-champagne/15 bg-black/30 px-3 text-xs font-black text-champagne backdrop-blur transition hover:border-champagne/40 sm:px-4">
-                <i class="fa-solid fa-crown text-[12px]"></i>
+    <main class="mobile-shell safe-bottom relative z-10 mx-auto flex min-h-screen w-full max-w-7xl flex-col px-4 py-5 sm:px-6 lg:px-8">
+        <header class="mb-4 flex items-center justify-between gap-3 sm:mb-6">
+            <a href="https://rustamoff.site" target="_blank" class="stable-button inline-flex items-center gap-3 rounded-2xl border border-champagne/20 bg-black/45 px-3 text-xs font-black text-champagne shadow-premium backdrop-blur transition hover:border-champagne/45 sm:px-4">
+                <span class="flex h-8 w-8 items-center justify-center rounded-xl border border-champagne/30 bg-black text-lg font-black leading-none text-champagne">AR</span>
                 <span>RUSTAMOFF</span>
             </a>
 
             <div class="flex items-center gap-2">
-                <button @click="showQrModal = true" class="stable-button w-11 rounded-2xl border border-champagne/15 bg-black/30 text-champagne backdrop-blur transition hover:border-champagne/40 active:scale-95 sm:w-12" aria-label="QR Kodu göstər">
+                <button @click="showQrModal = true" class="stable-button w-11 rounded-2xl border border-champagne/20 bg-black/45 text-champagne backdrop-blur transition hover:border-champagne/45 active:scale-95 sm:w-12" aria-label="QR Kodu göstər">
                     <i class="fa-solid fa-qrcode text-[15px]"></i>
                 </button>
-                <button @click="shareCard()" class="stable-button w-11 rounded-2xl border border-champagne/15 bg-black/30 text-champagne backdrop-blur transition hover:border-champagne/40 active:scale-95 sm:w-12" aria-label="Profili paylaş">
+                <button @click="shareCard()" class="stable-button w-11 rounded-2xl border border-champagne/20 bg-black/45 text-champagne backdrop-blur transition hover:border-champagne/45 active:scale-95 sm:w-12" aria-label="Profili paylaş">
                     <i class="fa-solid fa-share-nodes text-[15px]"></i>
                 </button>
             </div>
         </header>
 
-        <section class="grid flex-1 items-stretch gap-3 sm:gap-4 lg:grid-cols-[.92fr_1.08fr]">
-            <aside class="premium-card mobile-card relative overflow-hidden rounded-[2rem] p-4 sm:p-6">
-                <div class="absolute inset-x-6 top-0 h-px gold-line"></div>
-                <div class="mobile-hero relative flex h-full min-h-[420px] flex-col justify-between">
-                    <div class="flex items-center justify-between">
-                        <span class="rounded-full border border-champagne/20 bg-white/5 px-3 py-1 text-[10px] font-black uppercase text-champagne">Digital Card</span>
-                        <span class="text-[10px] font-black uppercase text-white/35">Baku / Azerbaijan</span>
-                    </div>
+        <section class="grid flex-1 items-center gap-5 lg:grid-cols-[minmax(0,1fr)_19rem] xl:grid-cols-[minmax(0,1fr)_21rem]">
+            <section class="grid gap-4">
+                <article class="brand-card mobile-business-card relative aspect-[1.62/1] overflow-hidden rounded-[1.45rem] p-4 sm:rounded-[2rem] sm:p-7">
+                    <div class="brand-pattern absolute inset-y-0 right-0 w-1/2"></div>
+                    <div class="absolute inset-x-0 top-[4.4rem] h-px bg-champagne/55 sm:top-[5.4rem]"></div>
+                    <div class="absolute inset-x-6 bottom-9 h-px bg-champagne/65"></div>
+                    <div class="card-edge absolute inset-x-0 bottom-0 h-12 bg-gradient-to-r from-champagne/85 via-[#8f6d2b] to-champagne/85 opacity-80"></div>
 
-                    <div class="py-4 text-center sm:py-6">
-                        <div class="portrait-glow mobile-portrait relative mx-auto mb-4 h-56 w-56 overflow-hidden rounded-[2rem] border border-champagne/25 bg-black shadow-premium sm:mb-6 sm:h-72 sm:w-72">
-                            <img :src="cardData.profile.avatar" :alt="cardData.profile.name" class="relative z-10 h-full w-full object-contain object-top" @error="handleAvatarError($event)">
-                            <div class="absolute inset-0 z-20 bg-gradient-to-t from-black/55 via-transparent to-white/5"></div>
+                    <div class="relative z-10 flex h-full flex-col">
+                        <div class="flex items-start justify-between gap-3">
+                            <div class="flex items-center gap-3">
+                                <span class="gold-text text-4xl font-black leading-none sm:text-5xl">AR</span>
+                                <span>
+                                    <span class="block text-sm font-black uppercase text-champagne sm:text-base">Rustamoff</span>
+                                    <span class="block text-xs font-semibold uppercase text-white/70">Digital Card</span>
+                                </span>
+                            </div>
+                            <div class="text-right">
+                                <span class="block text-xs font-black uppercase text-champagne sm:text-base">Vizitkart</span>
+                                <span class="block text-[10px] font-semibold uppercase text-white/70 sm:text-xs">Digital</span>
+                            </div>
                         </div>
-                        <p class="mb-2 text-[10px] font-black uppercase tracking-[.2em] text-champagne/75 sm:text-xs" x-text="cardData.profile.title"></p>
-                        <h1 class="gold-text mobile-heading text-4xl font-black leading-none sm:text-5xl" x-text="cardData.profile.name"></h1>
-                        <p class="mobile-bio mx-auto mt-3 max-w-sm text-sm font-semibold leading-6 text-smoke sm:mt-4" x-text="cardData.profile.shortBio"></p>
-                    </div>
 
-                    <div class="grid grid-cols-3 gap-2.5">
-                        <div class="mobile-chip rounded-2xl border border-champagne/12 bg-white/[.04] p-3 text-center">
-                            <span class="block text-sm font-black text-white">VCF</span>
-                            <span class="mt-1 block text-[9px] font-black uppercase text-white/35">Kontakt</span>
+                        <div class="grid flex-1 items-center gap-5 py-5 sm:grid-cols-[15rem_minmax(0,1fr)] sm:py-7 lg:grid-cols-[16rem_minmax(0,1fr)]">
+                            <div class="flex flex-col items-center sm:items-start">
+                                <div class="relative h-36 w-36 overflow-hidden rounded-full border-[3px] border-champagne bg-black shadow-gold sm:h-44 sm:w-44">
+                                    <img :src="cardData.profile.avatar" :alt="cardData.profile.name" class="h-full w-full object-cover grayscale" @error="handleAvatarError($event)">
+                                </div>
+                                <div class="mt-4 flex items-end gap-3">
+                                    <button @click="showQrModal = true" class="qr-frame flex h-24 w-24 items-center justify-center rounded-xl bg-champagne p-1.5 transition active:scale-95 sm:h-28 sm:w-28" aria-label="QR kodu göstər">
+                                        <img :src="qrCodeUrl(220)" alt="Ali Rustamov QR Code" class="h-full w-full rounded-lg bg-white object-contain">
+                                    </button>
+                                    <span class="hidden rotate-[-14deg] pb-2 text-sm font-black italic text-champagne sm:block">Scan Me</span>
+                                </div>
+                            </div>
+
+                            <div class="min-w-0 text-center sm:text-left">
+                                <p class="text-xs font-black uppercase tracking-[.28em] text-champagne/70" x-text="cardData.profile.title"></p>
+                                <h1 class="gold-text mt-2 text-4xl font-black leading-[.94] sm:text-5xl lg:text-6xl" x-text="cardData.profile.name"></h1>
+                                <p class="mt-2 text-sm font-black uppercase text-white/70">Founder</p>
+                                <div class="gold-divider my-4"></div>
+
+                                <div class="grid gap-2.5">
+                                    <template x-for="contact in cardData.contacts" :key="contact.id">
+                                        <div class="flex items-center justify-center gap-3 sm:justify-start">
+                                            <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-champagne/50 text-champagne">
+                                                <i :class="contact.icon" class="text-[12px]"></i>
+                                            </span>
+                                            <a :href="contact.href" class="truncate text-sm font-bold text-white/85 transition hover:text-champagne sm:text-base" x-text="contact.value"></a>
+                                        </div>
+                                    </template>
+                                    <div class="flex items-center justify-center gap-3 sm:justify-start">
+                                        <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-champagne/50 text-champagne">
+                                            <i class="fa-brands fa-instagram text-[13px]"></i>
+                                        </span>
+                                        <a href="https://www.instagram.com/ru8tam0ff/" target="_blank" class="truncate text-sm font-bold text-white/85 transition hover:text-champagne sm:text-base">@ru8tam0ff</a>
+                                    </div>
+                                    <div class="flex items-center justify-center gap-3 sm:justify-start">
+                                        <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-champagne/50 text-champagne">
+                                            <i class="fa-solid fa-globe text-[12px]"></i>
+                                        </span>
+                                        <a href="https://rustamoff.site" target="_blank" class="truncate text-sm font-bold text-white/85 transition hover:text-champagne sm:text-base">rustamoff.site</a>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="mobile-chip rounded-2xl border border-champagne/12 bg-white/[.04] p-3 text-center">
-                            <span class="block text-sm font-black text-white">QR</span>
-                            <span class="mt-1 block text-[9px] font-black uppercase text-white/35">Paylaş</span>
+
+                        <div class="relative z-10 mt-auto flex items-center justify-center gap-2 text-[10px] font-black uppercase tracking-[.35em] text-black/75 sm:text-xs">
+                            <span>Əlaqə</span>
+                            <span>•</span>
+                            <span>Bağlantı</span>
+                            <span>•</span>
+                            <span>İmkan</span>
                         </div>
-                        <div class="mobile-chip rounded-2xl border border-champagne/12 bg-white/[.04] p-3 text-center">
-                            <span class="block text-sm font-black text-white">24/7</span>
-                            <span class="mt-1 block text-[9px] font-black uppercase text-white/35">Əlaqə</span>
-                        </div>
                     </div>
-                </div>
-            </aside>
+                </article>
 
-            <section class="grid gap-3 sm:gap-4">
-                <div class="premium-card mobile-card rounded-[2rem] p-3 sm:p-5">
-                    <div class="grid grid-cols-2 gap-2.5 sm:grid-cols-3 sm:gap-3">
-                        <a href="tel:+994773313327" class="mobile-action stable-button action-primary inline-flex items-center justify-center gap-2 rounded-2xl px-3 text-sm font-black transition active:scale-[.98] sm:px-4">
-                            <i class="fa-solid fa-phone-volume text-[13px]"></i>
-                            Zəng et
-                        </a>
-                        <button @click="downloadVCard()" class="mobile-action stable-button action-secondary inline-flex items-center justify-center gap-2 rounded-2xl px-3 text-sm font-black text-white transition hover:bg-white/10 active:scale-[.98] sm:px-4">
-                            <i class="fa-solid fa-mobile-screen-button text-[13px] text-champagne"></i>
-                            Telefona əlavə et
-                        </button>
-                        <a href="https://wa.me/994773313327?text=Salam.%20Sizinl%C9%99%20me.rustamoff.site%20vizitkart%C4%B1%20%C3%BCz%C9%99rind%C9%99n%20%C9%99laq%C9%99%20saxlay%C4%B1ram." target="_blank" class="mobile-action stable-button action-secondary col-span-2 inline-flex items-center justify-center gap-2 rounded-2xl px-3 text-sm font-black text-white transition hover:bg-white/10 active:scale-[.98] sm:col-span-1 sm:px-4">
-                            <i class="fa-brands fa-whatsapp text-[15px] text-champagne"></i>
-                            WhatsApp
-                        </a>
-                    </div>
-                </div>
-
-                <div id="contact" class="premium-card mobile-card rounded-[2rem] p-3 sm:p-5 scroll-mt-5">
-                    <div class="mb-3 flex items-center justify-between">
-                        <h2 class="text-[11px] font-black uppercase tracking-[.2em] text-champagne/70">Əlaqə məlumatları</h2>
-                        <span class="h-px flex-1 bg-gradient-to-r from-champagne/30 to-transparent ml-4"></span>
-                    </div>
-
-                    <div class="grid gap-2.5 sm:grid-cols-2 sm:gap-3">
-                        <template x-for="contact in cardData.contacts" :key="contact.id">
-                            <div class="flex items-center justify-between rounded-2xl border border-champagne/12 bg-black/25 p-2.5 transition hover:border-champagne/30 sm:p-3">
-                                <a :href="contact.href" class="flex min-w-0 flex-1 items-center gap-3">
-                                    <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-champagne text-black shadow-gold sm:h-11 sm:w-11">
-                                        <i :class="contact.icon" class="text-[14px]"></i>
-                                    </span>
-                                    <span class="min-w-0 text-left">
-                                        <span class="block text-[9px] font-black uppercase text-champagne/65" x-text="contact.label"></span>
-                                        <span class="block truncate text-sm font-black text-white" x-text="contact.value"></span>
-                                    </span>
+                <section class="grid gap-4 lg:grid-cols-[1fr_.58fr_.82fr]">
+                    <article class="premium-card mobile-card relative overflow-hidden rounded-[1.45rem] p-4 sm:p-5">
+                        <div class="brand-pattern absolute inset-0"></div>
+                        <div class="relative z-10">
+                            <p class="mb-4 text-xs font-black uppercase text-white/75">Arxa tərəf</p>
+                            <div class="grid min-h-44 place-items-center rounded-2xl border border-champagne/25 bg-black/45 p-5 text-center">
+                                <div>
+                                    <div class="gold-text text-5xl font-black leading-none">AR</div>
+                                    <p class="mt-2 text-sm font-black uppercase tracking-[.2em] text-white">Rustamoff</p>
+                                    <p class="mt-5 text-sm font-black italic text-champagne">Yeniliklərə açıq ol</p>
+                                </div>
+                            </div>
+                            <div class="mt-3 grid grid-cols-3 gap-2">
+                                <a href="tel:+994773313327" class="mobile-action action-primary inline-flex items-center justify-center gap-2 rounded-xl px-2 text-[11px] font-black">
+                                    <i class="fa-solid fa-phone text-[10px]"></i>
+                                    Təmas et
                                 </a>
-                                <button @click="copyToClipboard(contact.value, contact.label)" class="ml-2 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl text-white/45 transition hover:bg-white/10 hover:text-champagne sm:h-10 sm:w-10" title="Kopyala">
-                                    <i class="fa-regular fa-copy text-[13px]"></i>
+                                <button @click="downloadVCard()" class="mobile-action action-secondary inline-flex items-center justify-center gap-2 rounded-xl px-2 text-[11px] font-black text-white">
+                                    <i class="fa-solid fa-link text-[10px] text-champagne"></i>
+                                    Əlaqə qur
+                                </button>
+                                <button @click="shareCard()" class="mobile-action action-secondary inline-flex items-center justify-center gap-2 rounded-xl px-2 text-[11px] font-black text-white">
+                                    <i class="fa-solid fa-star text-[10px] text-champagne"></i>
+                                    Paylaş
                                 </button>
                             </div>
-                        </template>
-                    </div>
+                        </div>
+                    </article>
 
-                    <div class="mt-3 grid grid-cols-3 gap-2 sm:gap-2.5">
-                        <template x-for="social in cardData.socials" :key="social.name">
-                            <a :href="social.href" target="_blank" class="flex min-h-[66px] flex-col items-center justify-center rounded-2xl border border-champagne/12 bg-black/25 px-2 text-center transition hover:-translate-y-0.5 hover:border-champagne/35 hover:bg-white/[.06] sm:min-h-[78px]">
-                                <i :class="social.icon" class="mb-1.5 text-[18px] text-champagne sm:mb-2 sm:text-[20px]"></i>
-                                <span class="w-full truncate text-[10px] font-black text-white/75" x-text="social.name"></span>
-                            </a>
-                        </template>
+                    <article class="premium-card mobile-card rounded-[1.45rem] p-4 sm:p-5">
+                        <p class="mb-4 text-xs font-black uppercase text-white/75">İkon</p>
+                        <div class="mx-auto flex h-24 w-24 items-center justify-center rounded-2xl border border-champagne/30 bg-black text-5xl font-black text-champagne shadow-gold">AR</div>
+                        <p class="mt-5 text-xs font-black uppercase text-white/75">Rəng palitrası</p>
+                        <div class="mt-3 grid grid-cols-4 gap-2">
+                            <span class="h-10 rounded-lg bg-[#d4af37]"></span>
+                            <span class="h-10 rounded-lg bg-[#b8860b]"></span>
+                            <span class="h-10 rounded-lg bg-[#1a1a1a]"></span>
+                            <span class="h-10 rounded-lg bg-[#080706]"></span>
+                        </div>
+                    </article>
+
+                    <article class="premium-card mobile-card rounded-[1.45rem] p-4 sm:p-5">
+                        <p class="mb-4 text-xs font-black uppercase text-white/75">Xüsusiyyətlər</p>
+                        <div class="grid gap-3">
+                            <div class="flex items-center gap-3">
+                                <i class="fa-regular fa-address-card w-5 text-lg text-champagne"></i>
+                                <span class="text-sm font-bold text-white/80">Telefona kontakt kimi əlavə olunur</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <i class="fa-solid fa-qrcode w-5 text-lg text-champagne"></i>
+                                <span class="text-sm font-bold text-white/80">QR kod ilə sürətli əlaqə</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <i class="fa-solid fa-share-nodes w-5 text-lg text-champagne"></i>
+                                <span class="text-sm font-bold text-white/80">Bir toxunuşla paylaşım</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <i class="fa-regular fa-gem w-5 text-lg text-champagne"></i>
+                                <span class="text-sm font-bold text-white/80">Premium qızılı görünüş</span>
+                            </div>
+                        </div>
+                    </article>
+                </section>
+            </section>
+
+            <aside class="mx-auto w-full max-w-[19rem] lg:max-w-none">
+                <div class="phone-frame mobile-phone relative mx-auto overflow-hidden rounded-[2.4rem] p-3">
+                    <div class="phone-notch absolute top-0 h-7 w-28"></div>
+                    <div class="rounded-[1.85rem] bg-[#f7f7f7] p-3 pt-10 text-black">
+                        <div class="mb-3 flex items-center justify-between text-[10px] font-bold">
+                            <span>Done</span>
+                            <span>09:41</span>
+                            <span class="h-5 w-5 rounded-full bg-black/90"></span>
+                        </div>
+                        <div class="brand-card relative overflow-hidden rounded-xl p-3 text-white">
+                            <div class="brand-pattern absolute inset-0"></div>
+                            <div class="relative z-10">
+                                <div class="mb-3 flex items-center justify-between">
+                                    <div class="flex items-center gap-1.5">
+                                        <span class="gold-text text-2xl font-black leading-none">AR</span>
+                                        <span>
+                                            <span class="block text-[8px] font-black uppercase text-champagne">Rustamoff</span>
+                                            <span class="block text-[7px] uppercase text-white/60">Digital Card</span>
+                                        </span>
+                                    </div>
+                                    <span class="text-[7px] font-black uppercase text-champagne">Vizitkart</span>
+                                </div>
+                                <div class="grid grid-cols-[4.2rem_1fr] gap-3">
+                                    <div>
+                                        <div class="h-16 w-16 overflow-hidden rounded-full border-2 border-champagne bg-black">
+                                            <img :src="cardData.profile.avatar" :alt="cardData.profile.name" class="h-full w-full object-cover grayscale" @error="handleAvatarError($event)">
+                                        </div>
+                                        <img :src="qrCodeUrl(120)" alt="Ali Rustamov QR Code" class="mt-3 h-14 w-14 rounded-md bg-white p-1">
+                                    </div>
+                                    <div class="min-w-0">
+                                        <h2 class="gold-text text-lg font-black leading-none">Əli<br>Rüstəmov</h2>
+                                        <p class="mb-2 mt-1 text-[7px] font-bold uppercase text-white/70">Founder</p>
+                                        <div class="space-y-1.5 text-[8px] font-bold text-white/80">
+                                            <p class="truncate"><i class="fa-solid fa-phone mr-1 text-champagne"></i>077 331 33 27</p>
+                                            <p class="truncate"><i class="fa-brands fa-whatsapp mr-1 text-champagne"></i>077 331 33 27</p>
+                                            <p class="truncate"><i class="fa-regular fa-envelope mr-1 text-champagne"></i>me@rustamoff.site</p>
+                                            <p class="truncate"><i class="fa-solid fa-globe mr-1 text-champagne"></i>rustamoff.site</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="mt-3 text-center text-[7px] font-black uppercase tracking-[.28em] text-champagne">Əlaqə • Bağlantı • İmkan</p>
+                            </div>
+                        </div>
+                        <div class="mx-auto mt-7 flex h-14 w-14 items-center justify-center rounded-full border-2 border-blue-500 text-blue-500">
+                            <i class="fa-solid fa-wave-square"></i>
+                        </div>
+                        <p class="mt-2 text-center text-[10px] font-semibold text-black/45">Hold Near Reader</p>
                     </div>
                 </div>
 
-                <form @submit.prevent="sendContactMessage()" class="premium-card mobile-card rounded-[2rem] p-3 sm:p-5">
-                    <div class="mb-3 flex items-center gap-3">
-                        <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-champagne text-black shadow-gold sm:h-11 sm:w-11">
-                            <i class="fa-regular fa-message text-[14px]"></i>
-                        </span>
-                        <div class="min-w-0 text-left">
-                            <h2 class="text-[11px] font-black uppercase tracking-[.2em] text-champagne/70">Mesaj yaz</h2>
-                        </div>
-                    </div>
-                    <textarea
-                        x-model="contactMessage"
-                        :disabled="messageSending"
-                        maxlength="900"
-                        placeholder="Mesajınızı yazın..."
-                        class="min-h-24 w-full resize-y rounded-2xl border border-champagne/12 bg-black/30 px-3.5 py-3 text-sm font-semibold text-white outline-none transition placeholder:text-white/30 focus:border-champagne/45 disabled:opacity-60 sm:min-h-28"></textarea>
-                    <div class="mt-3 flex items-center justify-between gap-3">
-                        <p class="min-h-5 text-[11px] font-semibold" :class="messageStatusType === 'error' ? 'text-red-300' : 'text-white/45'" x-text="messageStatus"></p>
-                        <button
-                            type="submit"
-                            :disabled="messageSending"
-                            class="mobile-action stable-button action-primary inline-flex min-w-24 items-center justify-center gap-2 rounded-2xl px-4 text-xs font-black uppercase transition active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-60 sm:min-w-28">
-                            <i :class="messageSending ? 'fa-solid fa-spinner fa-spin' : 'fa-solid fa-paper-plane'" class="text-[11px]"></i>
-                            <span x-text="messageSending ? 'Göndərilir' : 'Göndər'"></span>
-                        </button>
-                    </div>
-                </form>
-            </section>
+                <div class="mt-4 grid grid-cols-2 gap-2">
+                    <a href="tel:+994773313327" class="mobile-action action-primary inline-flex items-center justify-center gap-2 rounded-2xl px-3 text-sm font-black">
+                        <i class="fa-solid fa-phone-volume text-[13px]"></i>
+                        Zəng et
+                    </a>
+                    <button @click="downloadVCard()" class="mobile-action action-secondary inline-flex items-center justify-center gap-2 rounded-2xl px-3 text-sm font-black text-white">
+                        <i class="fa-solid fa-mobile-screen-button text-[13px] text-champagne"></i>
+                        Kontakt
+                    </button>
+                    <a href="https://wa.me/994773313327?text=Salam.%20Sizinl%C9%99%20me.rustamoff.site%20vizitkart%C4%B1%20%C3%BCz%C9%99rind%C9%99n%20%C9%99laq%C9%99%20saxlay%C4%B1ram." target="_blank" class="mobile-action action-secondary col-span-2 inline-flex items-center justify-center gap-2 rounded-2xl px-3 text-sm font-black text-white">
+                        <i class="fa-brands fa-whatsapp text-[15px] text-champagne"></i>
+                        WhatsApp
+                    </a>
+                </div>
+            </aside>
         </section>
 
-        <footer class="mt-4 flex flex-col gap-2 border-t border-champagne/10 pt-3 text-center text-xs font-semibold text-white/35 sm:mt-5 sm:flex-row sm:items-center sm:justify-between sm:pt-4 sm:text-left">
+        <section class="mt-5 grid gap-4 lg:grid-cols-[.9fr_1.1fr]">
+            <div id="contact" class="premium-card mobile-card rounded-[1.45rem] p-4 sm:p-5 scroll-mt-5">
+                <div class="mb-3 flex items-center justify-between">
+                    <h2 class="text-[11px] font-black uppercase tracking-[.2em] text-champagne/70">Əlaqə məlumatları</h2>
+                    <span class="ml-4 h-px flex-1 bg-gradient-to-r from-champagne/30 to-transparent"></span>
+                </div>
+
+                <div class="grid gap-2.5 sm:grid-cols-2 sm:gap-3">
+                    <template x-for="contact in cardData.contacts" :key="contact.id">
+                        <div class="flex items-center justify-between rounded-2xl border border-champagne/12 bg-black/25 p-2.5 transition hover:border-champagne/30 sm:p-3">
+                            <a :href="contact.href" class="flex min-w-0 flex-1 items-center gap-3">
+                                <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-champagne text-black shadow-gold sm:h-11 sm:w-11">
+                                    <i :class="contact.icon" class="text-[14px]"></i>
+                                </span>
+                                <span class="min-w-0 text-left">
+                                    <span class="block text-[9px] font-black uppercase text-champagne/65" x-text="contact.label"></span>
+                                    <span class="block truncate text-sm font-black text-white" x-text="contact.value"></span>
+                                </span>
+                            </a>
+                            <button @click="copyToClipboard(contact.value, contact.label)" class="ml-2 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl text-white/45 transition hover:bg-white/10 hover:text-champagne sm:h-10 sm:w-10" title="Kopyala">
+                                <i class="fa-regular fa-copy text-[13px]"></i>
+                            </button>
+                        </div>
+                    </template>
+                </div>
+
+                <div class="mt-3 grid grid-cols-3 gap-2 sm:gap-2.5">
+                    <template x-for="social in cardData.socials" :key="social.name">
+                        <a :href="social.href" target="_blank" class="flex min-h-[66px] flex-col items-center justify-center rounded-2xl border border-champagne/12 bg-black/25 px-2 text-center transition hover:-translate-y-0.5 hover:border-champagne/35 hover:bg-white/[.06] sm:min-h-[78px]">
+                            <i :class="social.icon" class="mb-1.5 text-[18px] text-champagne sm:mb-2 sm:text-[20px]"></i>
+                            <span class="w-full truncate text-[10px] font-black text-white/75" x-text="social.name"></span>
+                        </a>
+                    </template>
+                </div>
+            </div>
+
+            <form @submit.prevent="sendContactMessage()" class="premium-card mobile-card rounded-[1.45rem] p-4 sm:p-5">
+                <div class="mb-3 flex items-center gap-3">
+                    <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-champagne text-black shadow-gold sm:h-11 sm:w-11">
+                        <i class="fa-regular fa-message text-[14px]"></i>
+                    </span>
+                    <div class="min-w-0 text-left">
+                        <h2 class="text-[11px] font-black uppercase tracking-[.2em] text-champagne/70">Mesaj yaz</h2>
+                    </div>
+                </div>
+                <textarea
+                    x-model="contactMessage"
+                    :disabled="messageSending"
+                    maxlength="900"
+                    placeholder="Mesajınızı yazın..."
+                    class="min-h-24 w-full resize-y rounded-2xl border border-champagne/12 bg-black/30 px-3.5 py-3 text-sm font-semibold text-white outline-none transition placeholder:text-white/30 focus:border-champagne/45 disabled:opacity-60 sm:min-h-28"></textarea>
+                <div class="mt-3 flex items-center justify-between gap-3">
+                    <p class="min-h-5 text-[11px] font-semibold" :class="messageStatusType === 'error' ? 'text-red-300' : 'text-white/45'" x-text="messageStatus"></p>
+                    <button
+                        type="submit"
+                        :disabled="messageSending"
+                        class="mobile-action action-primary inline-flex min-w-24 items-center justify-center gap-2 rounded-2xl px-4 text-xs font-black uppercase transition active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-60 sm:min-w-28">
+                        <i :class="messageSending ? 'fa-solid fa-spinner fa-spin' : 'fa-solid fa-paper-plane'" class="text-[11px]"></i>
+                        <span x-text="messageSending ? 'Göndərilir' : 'Göndər'"></span>
+                    </button>
+                </div>
+            </form>
+        </section>
+
+        <footer class="mt-5 flex flex-col gap-2 border-t border-champagne/10 pt-3 text-center text-xs font-semibold text-white/35 sm:flex-row sm:items-center sm:justify-between sm:pt-4 sm:text-left">
             <span>&copy; 2026 Əli Rüstəmov. Premium rəqəmsal vizitkart.</span>
             <a href="https://rustamoff.site" target="_blank" class="font-black text-champagne hover:text-white">rustamoff.site</a>
         </footer>
