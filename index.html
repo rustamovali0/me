@@ -137,7 +137,7 @@
                             <div class="executive-rule my-5 h-1 w-28 rounded-full"></div>
                         </div>
 
-                        <div class="mt-6 grid gap-3 sm:grid-cols-2 sm:max-w-xl">
+                        <div class="mt-6 grid gap-3 sm:grid-cols-3 sm:max-w-2xl">
                             <a href="tel:+994773313327" class="stable-button inline-flex items-center justify-center gap-2 rounded-2xl bg-executive px-5 text-sm font-extrabold text-white shadow-lift transition hover:bg-[#0c2d28] active:scale-[0.98]">
                                 <i class="fa-solid fa-phone-volume text-[13px]"></i>
                                 Əlaqə saxla
@@ -145,6 +145,10 @@
                             <button @click="downloadVCard()" class="stable-button inline-flex items-center justify-center gap-2 rounded-2xl border border-executive/15 bg-white px-5 text-sm font-extrabold text-executive shadow-sm transition hover:border-executive/35 active:scale-[0.98]">
                                 <i class="fa-solid fa-address-book text-[13px] text-copper"></i>
                                 Kontaktı yüklə
+                            </button>
+                            <button @click="addToAppleWallet()" class="stable-button inline-flex items-center justify-center gap-2 rounded-2xl bg-ink px-5 text-sm font-extrabold text-white shadow-sm transition hover:bg-executive active:scale-[0.98]">
+                                <i class="fa-brands fa-apple text-[15px]"></i>
+                                Apple Wallet
                             </button>
                         </div>
                     </div>
@@ -423,6 +427,34 @@
                     document.body.removeChild(downloadLink);
                     URL.revokeObjectURL(blobUrl);
                     this.showToast('Kontakt yükləndi!');
+                },
+
+                async addToAppleWallet() {
+                    try {
+                        const response = await fetch('/api/apple-wallet', {
+                            headers: { Accept: 'application/vnd.apple.pkpass' }
+                        });
+                        const contentType = response.headers.get('content-type') || '';
+
+                        if (!response.ok || !contentType.includes('application/vnd.apple.pkpass')) {
+                            const result = await response.json().catch(() => ({}));
+                            throw new Error(result.error || 'Apple Wallet pass hazır deyil.');
+                        }
+
+                        const blob = await response.blob();
+                        const walletUrl = URL.createObjectURL(blob);
+                        const downloadLink = document.createElement('a');
+                        downloadLink.href = walletUrl;
+                        downloadLink.download = 'Ali_Rustamov_Wallet.pkpass';
+                        document.body.appendChild(downloadLink);
+                        downloadLink.click();
+                        document.body.removeChild(downloadLink);
+                        setTimeout(() => URL.revokeObjectURL(walletUrl), 5000);
+                        this.showToast('Apple Wallet açılır...');
+                    } catch (error) {
+                        this.showToast('Wallet sertifikatı hazır deyil, kontakt yüklənir.');
+                        this.downloadVCard();
+                    }
                 },
 
                 shareCard() {
