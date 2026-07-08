@@ -221,26 +221,26 @@
                                             <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-champagne/50 text-champagne">
                                                 <i :class="contact.icon" class="text-[12px]"></i>
                                             </span>
-                                            <a :href="contact.href" class="truncate text-sm font-bold text-white/85 transition hover:text-champagne sm:text-base" x-text="contact.value"></a>
+                                            <a :href="contact.href" class="truncate text-sm font-black text-white drop-shadow-[0_1px_8px_rgba(0,0,0,.65)] transition hover:text-champagne sm:text-base" x-text="contact.value"></a>
                                         </div>
                                     </template>
                                     <div class="flex items-center justify-center gap-3">
                                         <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-champagne/50 text-champagne">
                                             <i class="fa-brands fa-instagram text-[13px]"></i>
                                         </span>
-                                        <a href="https://www.instagram.com/ru8tam0ff/" target="_blank" class="truncate text-sm font-bold text-white/85 transition hover:text-champagne sm:text-base">@ru8tam0ff</a>
+                                        <a href="https://www.instagram.com/ru8tam0ff/" target="_blank" class="truncate text-sm font-black text-white drop-shadow-[0_1px_8px_rgba(0,0,0,.65)] transition hover:text-champagne sm:text-base">@ru8tam0ff</a>
                                     </div>
                                     <div class="flex items-center justify-center gap-3">
                                         <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-champagne/50 text-champagne">
                                             <i class="fa-solid fa-globe text-[12px]"></i>
                                         </span>
-                                        <a href="https://rustamoff.site" target="_blank" class="truncate text-sm font-bold text-white/85 transition hover:text-champagne sm:text-base">rustamoff.site</a>
+                                        <a href="https://rustamoff.site" target="_blank" class="truncate text-sm font-black text-white drop-shadow-[0_1px_8px_rgba(0,0,0,.65)] transition hover:text-champagne sm:text-base">rustamoff.site</a>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="relative z-10 mt-auto flex items-center justify-center gap-2 text-[10px] font-black uppercase tracking-[.35em] text-black/75 sm:text-xs">
+                        <div class="relative z-10 mt-auto flex items-center justify-center gap-2 text-[10px] font-black uppercase tracking-[.24em] text-[#120f08] drop-shadow-[0_1px_0_rgba(255,255,255,.35)] sm:text-xs">
                             <span>Əlaqə</span>
                             <span>•</span>
                             <span>Bağlantı</span>
@@ -251,14 +251,14 @@
                 </article>
 
                 <div class="grid grid-cols-2 gap-2.5">
-                    <a href="tel:+994773313327" class="mobile-action action-primary inline-flex items-center justify-center gap-2 rounded-2xl px-3 text-sm font-black">
-                        <i class="fa-solid fa-phone-volume text-[13px]"></i>
-                        Zəng et
-                    </a>
-                    <button @click="downloadVCard()" class="mobile-action action-secondary inline-flex items-center justify-center gap-2 rounded-2xl px-3 text-sm font-black text-white">
-                        <i class="fa-solid fa-mobile-screen-button text-[13px] text-champagne"></i>
+                    <button @click="downloadVCard()" class="mobile-action action-primary inline-flex items-center justify-center gap-2 rounded-2xl px-3 text-sm font-black">
+                        <i class="fa-solid fa-mobile-screen-button text-[13px]"></i>
                         Kontakt
                     </button>
+                    <a href="tel:+994773313327" class="mobile-action action-secondary inline-flex items-center justify-center gap-2 rounded-2xl px-3 text-sm font-black text-white">
+                        <i class="fa-solid fa-phone-volume text-[13px] text-champagne"></i>
+                        Zəng et
+                    </a>
                     <a href="https://wa.me/994773313327?text=Salam.%20Sizinl%C9%99%20me.rustamoff.site%20vizitkart%C4%B1%20%C3%BCz%C9%99rind%C9%99n%20%C9%99laq%C9%99%20saxlay%C4%B1ram." target="_blank" class="mobile-action action-secondary col-span-2 inline-flex items-center justify-center gap-2 rounded-2xl px-3 text-sm font-black text-white">
                         <i class="fa-brands fa-whatsapp text-[15px] text-champagne"></i>
                         WhatsApp
@@ -283,7 +283,7 @@
                                 </span>
                                 <span class="min-w-0 text-left">
                                     <span class="block text-[9px] font-black uppercase text-champagne/65" x-text="contact.label"></span>
-                                    <span class="block truncate text-sm font-black text-white" x-text="contact.value"></span>
+                                    <span class="block truncate text-sm font-black text-white drop-shadow-[0_1px_8px_rgba(0,0,0,.75)]" x-text="contact.value"></span>
                                 </span>
                             </a>
                             <button @click="copyToClipboard(contact.value, contact.label)" class="ml-2 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl text-white/45 transition hover:bg-white/10 hover:text-champagne sm:h-10 sm:w-10" title="Kopyala">
