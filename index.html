@@ -12,13 +12,14 @@
     <meta property="og:description" content="Kontaktı yadda saxla, sosial şəbəkələrə keç və birbaşa mesaj yaz.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://me.rustamoff.site/">
-    <meta property="og:image" content="https://icwpaipqqqwjpooazmcu.supabase.co/storage/v1/object/sign/logos/WhatsApp%20Image%202026-04-10%20at%2022.03.30.webp?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV8xMjAzOTRmMy04ZjhmLTQwOTItYjA2Ny04ZDBmODZiOWE1OWEiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJsb2dvcy9XaGF0c0FwcCBJbWFnZSAyMDI2LTA0LTEwIGF0IDIyLjAzLjMwLndlYnAiLCJzY29wZSI6ImRvd25sb2FkIiwiaWF0IjoxNzgyODkwMTg2LCJleHAiOjIwOTgyNTAxODZ9.A1uPZ1TTx0xPQmu_ZlTF3GKeTaT-wyScdRUmwsFBdD0">
+    <meta property="og:image" content="https://me.rustamoff.site/assets/rustamoff-logo.png">
 
     <meta name="theme-color" content="#080706">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-    <link rel="shortcut icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="icon" type="image/png" href="/assets/favicon.png">
+    <link rel="shortcut icon" type="image/png" href="/assets/favicon.png">
+    <link rel="apple-touch-icon" href="/assets/favicon.png">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -153,7 +154,7 @@
     <main class="mobile-shell safe-bottom relative z-10 mx-auto flex min-h-screen w-full max-w-md flex-col px-4 py-5 sm:max-w-lg sm:px-6">
         <header class="mb-4 flex items-center justify-between gap-3 sm:mb-6">
             <a href="https://rustamoff.site" target="_blank" class="stable-button inline-flex items-center gap-3 rounded-2xl border border-champagne/20 bg-black/45 px-3 text-xs font-black text-champagne shadow-premium backdrop-blur transition hover:border-champagne/45 sm:px-4">
-                <span class="flex h-8 w-8 items-center justify-center rounded-xl border border-champagne/30 bg-black text-lg font-black leading-none text-champagne">AR</span>
+                <img src="/assets/favicon.png" alt="Rustamoff logo" class="h-8 w-8 rounded-xl border border-champagne/30 bg-black object-cover">
                 <span>RUSTAMOFF</span>
             </a>
 
@@ -173,7 +174,7 @@
                     <div class="relative z-10 flex h-full flex-col">
                         <div class="flex items-start justify-between gap-3">
                             <div class="flex items-center gap-3">
-                                <span class="gold-text text-4xl font-black leading-none sm:text-5xl">AR</span>
+                                <img src="/assets/favicon.png" alt="Rustamoff logo" class="h-14 w-14 rounded-2xl border border-champagne/30 bg-black object-cover shadow-gold">
                                 <span>
                                     <span class="block text-sm font-black uppercase text-champagne sm:text-base">Rustamoff</span>
                                     <span class="block text-xs font-semibold uppercase text-white/70">Digital Card</span>
@@ -211,14 +212,13 @@
                                             <a :href="contact.href" class="truncate text-sm font-black text-white drop-shadow-[0_1px_8px_rgba(0,0,0,.65)] transition hover:text-champagne sm:text-base" x-text="contact.value"></a>
                                         </div>
                                     </template>
-                                    <template x-for="social in cardData.socials" :key="social.name">
-                                        <div class="flex items-center justify-center gap-3">
-                                            <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-champagne/50 text-champagne">
-                                                <i :class="social.icon" class="text-[13px]"></i>
-                                            </span>
-                                            <a :href="social.href" target="_blank" class="truncate text-sm font-black text-white drop-shadow-[0_1px_8px_rgba(0,0,0,.65)] transition hover:text-champagne sm:text-base" x-text="social.handle"></a>
-                                        </div>
-                                    </template>
+                                    <div class="flex items-center justify-center gap-2.5">
+                                        <template x-for="social in cardData.socials" :key="social.name">
+                                            <a :href="social.href" target="_blank" class="flex h-12 w-12 items-center justify-center rounded-2xl border border-champagne/45 bg-gradient-to-br from-white/12 to-black/35 text-champagne shadow-gold transition hover:-translate-y-0.5 hover:border-champagne hover:bg-white/10 active:scale-95" :aria-label="social.name">
+                                                <i :class="social.icon" class="text-[18px]"></i>
+                                            </a>
+                                        </template>
+                                    </div>
                                     <div class="flex items-center justify-center gap-3">
                                         <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-champagne/50 text-champagne">
                                             <i class="fa-solid fa-globe text-[12px]"></i>
@@ -240,8 +240,8 @@
                 </article>
 
                 <div class="grid gap-2.5">
-                    <a href="tel:+994773313327" class="mobile-action action-primary inline-flex items-center justify-center gap-2 rounded-2xl px-3 text-sm font-black">
-                        <i class="fa-solid fa-phone-volume text-[13px]"></i>
+                    <a href="tel:+994773313327" class="mobile-action action-primary inline-flex min-h-14 items-center justify-center gap-2 rounded-2xl px-4 text-base font-black">
+                        <i class="fa-solid fa-phone-volume text-[15px]"></i>
                         Zəng et
                     </a>
                 </div>
@@ -275,8 +275,8 @@
                 </div>
 
                 <button @click="showQrModal = true" class="mt-3 flex w-full items-center gap-3 rounded-2xl border border-champagne/20 bg-black/35 p-3 text-left transition hover:border-champagne/40" aria-label="QR kodu göstər">
-                    <span class="flex h-16 w-16 shrink-0 items-center justify-center rounded-xl bg-white p-1.5 shadow-gold">
-                        <img :src="qrCodeUrl(160)" alt="Ali Rustamov QR Code" class="h-full w-full rounded-lg object-contain">
+                    <span class="flex h-20 w-20 shrink-0 items-center justify-center rounded-xl bg-white p-1.5 shadow-gold">
+                        <img :src="qrCodeUrl(220)" alt="Ali Rustamov QR Code" class="h-full w-full rounded-lg object-contain">
                     </span>
                     <span class="min-w-0">
                         <span class="block text-[9px] font-black uppercase tracking-[.14em] text-champagne/70">QR kod</span>
@@ -307,8 +307,8 @@
                     <button
                         type="submit"
                         :disabled="messageSending"
-                        class="mobile-action action-primary inline-flex min-w-24 items-center justify-center gap-2 rounded-2xl px-4 text-xs font-black uppercase transition active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-60 sm:min-w-28">
-                        <i :class="messageSending ? 'fa-solid fa-spinner fa-spin' : 'fa-solid fa-paper-plane'" class="text-[11px]"></i>
+                        class="mobile-action action-primary inline-flex min-h-12 min-w-32 items-center justify-center gap-2 rounded-2xl px-5 text-sm font-black uppercase transition active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-60">
+                        <i :class="messageSending ? 'fa-solid fa-spinner fa-spin' : 'fa-solid fa-paper-plane'" class="text-[13px]"></i>
                         <span x-text="messageSending ? 'Göndərilir' : 'Göndər'"></span>
                     </button>
                 </div>
@@ -322,9 +322,9 @@
 
                 <div class="grid gap-2.5">
                     <template x-for="social in cardData.socials" :key="social.name">
-                        <a :href="social.href" target="_blank" class="flex items-center gap-3 rounded-2xl border border-champagne/20 bg-black/35 p-3 transition hover:border-champagne/40">
-                            <span class="flex h-16 w-16 shrink-0 items-center justify-center rounded-xl bg-white p-1.5 shadow-gold">
-                                <img :src="qrForUrl(social.href, 160)" :alt="`${social.name} QR Code`" class="h-full w-full rounded-lg object-contain">
+                        <button @click="openLargeQr(social)" class="flex w-full items-center gap-3 rounded-2xl border border-champagne/20 bg-black/35 p-3 text-left transition hover:border-champagne/40" type="button">
+                            <span class="flex h-20 w-20 shrink-0 items-center justify-center rounded-xl bg-white p-1.5 shadow-gold">
+                                <img :src="qrForUrl(social.href, 220)" :alt="`${social.name} QR Code`" class="h-full w-full rounded-lg object-contain">
                             </span>
                             <span class="min-w-0">
                                 <span class="flex items-center gap-2 text-sm font-black text-white">
@@ -333,8 +333,8 @@
                                 </span>
                                 <span class="mt-1 block truncate text-xs font-bold text-white/55" x-text="social.handle"></span>
                             </span>
-                            <i class="fa-solid fa-arrow-up-right-from-square ml-auto text-xs text-champagne/70"></i>
-                        </a>
+                            <i class="fa-solid fa-up-right-and-down-left-from-center ml-auto text-xs text-champagne/70"></i>
+                        </button>
                     </template>
                 </div>
             </section>
@@ -405,6 +405,34 @@
         </div>
     </div>
 
+    <div class="fixed inset-0 z-50 flex items-center justify-center p-4" x-show="activeQr" style="display: none;">
+        <div class="fixed inset-0 bg-black/80 backdrop-blur-sm" @click="activeQr = null"></div>
+        <div class="premium-card relative z-10 w-full max-w-sm rounded-[2rem] p-6 text-center shadow-2xl"
+             x-show="activeQr"
+             x-transition:enter="transition ease-out duration-300"
+             x-transition:enter-start="opacity-0 scale-95"
+             x-transition:enter-end="opacity-100 scale-100"
+             x-transition:leave="transition ease-in duration-200"
+             x-transition:leave-start="opacity-100 scale-100"
+             x-transition:leave-end="opacity-0 scale-95">
+            <button @click="activeQr = null" class="absolute right-4 top-4 flex h-9 w-9 items-center justify-center rounded-full bg-white/10 text-white/50 transition hover:text-white">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <h3 class="mb-1.5 text-lg font-black text-white" x-text="activeQr?.name"></h3>
+            <p class="mx-auto mb-5 max-w-xs text-xs font-semibold leading-5 text-white/50">QR kodu skan et və birbaşa keçid et.</p>
+
+            <div class="mx-auto flex h-64 w-64 items-center justify-center rounded-3xl border border-champagne/20 bg-white p-4 shadow-inner">
+                <img :src="qrForUrl(activeQr?.href || profileUrl, 420)" :alt="`${activeQr?.name || 'QR'} QR Code`" class="h-full w-full object-contain">
+            </div>
+
+            <a :href="activeQr?.href" target="_blank" class="stable-button action-primary mt-6 flex w-full items-center justify-center gap-2 rounded-2xl px-4 text-xs font-black" @click="activeQr = null">
+                <i class="fa-solid fa-arrow-up-right-from-square text-[11px]"></i>
+                Aç
+            </a>
+        </div>
+    </div>
+
     <script>
         const KEMER_MESSAGE_FUNCTION_URL = 'https://icwpaipqqqwjpooazmcu.supabase.co/functions/v1/send-footer-message';
         const KEMER_SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_W5rnAxonO_Sq-EnCdlFU7Q_mkmi37yJ';
@@ -414,6 +442,7 @@
 
             return {
                 showQrModal: false,
+                activeQr: null,
                 toast: { show: false, message: '' },
                 contactMessage: '',
                 messageSending: false,
@@ -426,7 +455,7 @@
                         name: 'Əli Rüstəmov',
                         title: 'Şəxsi profil',
                         shortBio: 'Əlaqə, sosial şəbəkələr və bir toxunuşla telefona əlavə olunan premium rəqəmsal vizitkart.',
-                        avatar: 'https://icwpaipqqqwjpooazmcu.supabase.co/storage/v1/object/sign/logos/WhatsApp%20Image%202026-04-10%20at%2022.03.30.webp?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV8xMjAzOTRmMy04ZjhmLTQwOTItYjA2Ny04ZDBmODZiOWE1OWEiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJsb2dvcy9XaGF0c0FwcCBJbWFnZSAyMDI2LTA0LTEwIGF0IDIyLjAzLjMwLndlYnAiLCJzY29wZSI6ImRvd25sb2FkIiwiaWF0IjoxNzgyODkwMTg2LCJleHAiOjIwOTgyNTAxODZ9.A1uPZ1TTx0xPQmu_ZlTF3GKeTaT-wyScdRUmwsFBdD0'
+                        avatar: '/assets/profile.jpeg'
                     },
                     contacts: [
                         { id: 'phone', label: 'Telefon', value: '077-331-33-27', href: 'tel:+994773313327', icon: 'fa-solid fa-phone' },
@@ -512,6 +541,10 @@
 
                 qrCodeUrl(size = 600) {
                     return this.qrForUrl(this.profileUrl, size);
+                },
+
+                openLargeQr(social) {
+                    this.activeQr = social;
                 },
 
                 async downloadQrCode() {
