@@ -140,6 +140,21 @@
             height: 1px;
             background: linear-gradient(90deg, transparent, rgba(216,192,138,.95), transparent);
         }
+        .profile-photo {
+            transition: transform .45s cubic-bezier(.2,.8,.2,1), box-shadow .45s ease, border-color .45s ease;
+        }
+        .profile-photo img {
+            transition: transform .45s cubic-bezier(.2,.8,.2,1), filter .45s ease;
+        }
+        .profile-photo:hover {
+            transform: scale(1.045);
+            border-color: rgba(255,244,207,.95);
+            box-shadow: 0 26px 68px -28px rgba(216,192,138,.9), 0 0 0 1px rgba(255,244,207,.35);
+        }
+        .profile-photo:hover img {
+            transform: scale(1.06);
+            filter: grayscale(1) contrast(1.08);
+        }
         @keyframes slow-spin { to { transform: rotate(360deg); } }
         @media (prefers-reduced-motion: reduce) {
             * { animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; }
@@ -165,12 +180,12 @@
             <section class="grid gap-3">
                 <article class="brand-card mobile-business-card relative overflow-hidden rounded-[1.45rem] p-3.5 sm:rounded-[2rem] sm:p-6">
                     <div class="brand-pattern absolute inset-y-0 right-0 w-1/2"></div>
-                    <div class="absolute inset-x-0 top-[5.15rem] h-px bg-champagne/55 sm:top-[6rem]"></div>
+                    <div class="absolute inset-x-0 top-[5.55rem] h-px bg-champagne/55 sm:top-[6.35rem]"></div>
                     <div class="absolute inset-x-6 bottom-9 h-px bg-champagne/65"></div>
                     <div class="card-edge absolute inset-x-0 bottom-0 h-12 bg-gradient-to-r from-champagne/85 via-[#8f6d2b] to-champagne/85 opacity-80"></div>
 
                     <div class="relative z-10 flex h-full flex-col">
-                        <div class="flex items-center justify-between gap-3 px-0.5 pt-1 pb-3">
+                        <div class="flex items-center justify-between gap-3 px-0.5 pt-1 pb-5">
                             <a href="https://rustamoff.site" target="_blank" class="premium-hover flex min-w-0 items-center gap-2.5 rounded-2xl border border-champagne/20 bg-black/35 p-2 pr-3 transition hover:border-champagne/45">
                                 <img src="/assets/favicon.png" alt="Rustamoff logo" class="h-11 w-11 shrink-0 rounded-xl border border-champagne/30 bg-black object-cover shadow-gold">
                                 <span>
@@ -185,7 +200,7 @@
 
                         <div class="flex flex-col items-center gap-4 py-4 sm:py-6">
                             <div class="flex flex-col items-center">
-                                <div class="relative h-44 w-44 overflow-hidden rounded-full border-[4px] border-champagne bg-black shadow-gold sm:h-52 sm:w-52">
+                                <div class="profile-photo relative h-44 w-44 overflow-hidden rounded-full border-[4px] border-champagne bg-black shadow-gold sm:h-52 sm:w-52">
                                     <img :src="cardData.profile.avatar" :alt="cardData.profile.name" class="h-full w-full object-cover grayscale" @error="handleAvatarError($event)">
                                 </div>
                             </div>
