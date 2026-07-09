@@ -184,7 +184,7 @@
                     <div class="absolute inset-x-6 bottom-9 h-px bg-champagne/65"></div>
                     <div class="card-edge absolute inset-x-0 bottom-0 h-12 bg-gradient-to-r from-champagne/85 via-[#8f6d2b] to-champagne/85 opacity-80"></div>
 
-                    <div class="relative z-10 flex h-full flex-col">
+                    <div class="relative z-10 flex flex-col">
                         <div class="flex items-center justify-between gap-3 px-0.5 pt-1 pb-5">
                             <a href="https://rustamoff.site" target="_blank" class="premium-hover flex min-w-0 items-center gap-2.5 rounded-2xl border border-champagne/20 bg-black/35 p-2 pr-3 transition hover:border-champagne/45">
                                 <img src="/assets/favicon.png" alt="Rustamoff logo" class="h-11 w-11 shrink-0 rounded-xl border border-champagne/30 bg-black object-cover shadow-gold">
@@ -256,7 +256,7 @@
                             </div>
                         </div>
 
-                        <div class="relative z-10 mt-auto flex items-center justify-center gap-2 text-[10px] font-black uppercase tracking-[.18em] text-white drop-shadow-[0_2px_7px_rgba(0,0,0,.9)] sm:text-xs">
+                        <div class="relative z-10 mt-3 flex items-center justify-center gap-2 text-[10px] font-black uppercase tracking-[.18em] text-white drop-shadow-[0_2px_7px_rgba(0,0,0,.9)] sm:text-xs">
                             <span>Əlaqə</span>
                             <span>•</span>
                             <span>Bağlantı</span>
@@ -312,6 +312,33 @@
                     <i class="fa-solid fa-chevron-right ml-auto text-xs text-champagne/70"></i>
                 </button>
             </div>
+
+            <section class="premium-card mobile-card rounded-[1.45rem] p-4 sm:p-5">
+                <div class="mb-4 flex items-center justify-between">
+                    <h2 class="text-[11px] font-black uppercase tracking-[.18em] text-champagne/80">Kapital Bank</h2>
+                    <span class="ml-4 h-px flex-1 bg-gradient-to-r from-champagne/30 to-transparent"></span>
+                </div>
+
+                <div class="flex items-center gap-3 rounded-2xl border border-champagne/20 bg-black/35 p-3">
+                    <button @click="openLargeQr(cardData.payment)" class="premium-hover flex h-24 w-24 shrink-0 items-center justify-center rounded-xl bg-white p-1.5 shadow-gold transition hover:scale-[1.03]" type="button" aria-label="Kapital Bank QR kodunu böyüt">
+                        <img :src="qrForUrl(cardData.payment.href, 220)" alt="Kapital Bank QR Code" class="h-full w-full rounded-lg object-contain">
+                    </button>
+                    <div class="min-w-0 flex-1">
+                        <p class="text-base font-black text-white">Kapital Bank</p>
+                        <p class="mt-1 truncate text-xs font-bold text-white/50" x-text="cardData.payment.handle"></p>
+                        <div class="mt-3 grid grid-cols-2 gap-2">
+                            <a :href="cardData.payment.href" target="_blank" class="stable-button action-secondary flex items-center justify-center gap-1.5 rounded-xl px-3 text-[11px] font-black text-white transition hover:bg-white/10">
+                                <i class="fa-solid fa-arrow-up-right-from-square text-[10px] text-champagne"></i>
+                                Linki aç
+                            </a>
+                            <button @click="sharePayment()" type="button" class="stable-button action-secondary flex items-center justify-center gap-1.5 rounded-xl px-3 text-[11px] font-black text-white transition hover:bg-white/10">
+                                <i class="fa-solid fa-share-nodes text-[10px] text-champagne"></i>
+                                Paylaş
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
 
             <form @submit.prevent="sendContactMessage()" class="premium-card mobile-card rounded-[1.45rem] p-4 sm:p-5">
                 <div class="mb-3 flex items-center gap-3">
@@ -492,7 +519,13 @@
                         { name: 'WhatsApp', handle: 'WhatsApp', href: 'https://wa.me/994773313327?text=Salam.%20Sizinl%C9%99%20me.rustamoff.site%20vizitkart%C4%B1%20%C3%BCz%C9%99rind%C9%99n%20%C9%99laq%C9%99%20saxlay%C4%B1ram.', icon: 'fa-brands fa-whatsapp' },
                         { name: 'Instagram', handle: '@ru8tam0ff', href: 'https://www.instagram.com/ru8tam0ff/', icon: 'fa-brands fa-instagram' },
                         { name: 'Telegram', handle: '@rustamoffali', href: 'https://t.me/rustamoffali', icon: 'fa-solid fa-paper-plane' }
-                    ]
+                    ],
+                    payment: {
+                        name: 'Kapital Bank',
+                        handle: '41697388****6167',
+                        href: 'https://app.birbank.az/qp?t=2&id=3DBC9CF62B92FD37E0634C0214AC7C7E',
+                        icon: 'fa-solid fa-building-columns'
+                    }
                 },
 
                 handleAvatarError(event) {
@@ -572,6 +605,21 @@
 
                 openLargeQr(social) {
                     this.activeQr = social;
+                },
+
+                sharePayment() {
+                    const payment = this.cardData.payment;
+                    const shareData = {
+                        title: payment.name,
+                        text: payment.handle,
+                        url: payment.href
+                    };
+
+                    if (navigator.share) {
+                        navigator.share(shareData).catch(() => {});
+                    } else {
+                        this.copyToClipboard(payment.href, 'Kapital Bank linki');
+                    }
                 },
 
                 async downloadQrCode() {
