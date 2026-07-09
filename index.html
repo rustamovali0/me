@@ -94,9 +94,18 @@
             color: #0b0a08;
             box-shadow: 0 20px 42px -28px rgba(216, 192, 138, .95), inset 0 1px 0 rgba(255,255,255,.55);
         }
+        .action-primary:hover {
+            box-shadow: 0 22px 54px -18px rgba(216,192,138,.82), 0 0 0 1px rgba(255,244,207,.42), inset 0 1px 0 rgba(255,255,255,.7);
+        }
         .action-secondary {
             background: rgba(255,255,255,.055);
             border: 1px solid rgba(216,192,138,.18);
+        }
+        .premium-hover {
+            box-shadow: 0 18px 38px -32px rgba(216,192,138,.45);
+        }
+        .premium-hover:hover {
+            box-shadow: 0 22px 56px -24px rgba(216,192,138,.68), 0 0 0 1px rgba(216,192,138,.28);
         }
         .stable-button { min-height: 48px; }
         .safe-bottom {
@@ -136,7 +145,7 @@
             * { animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; }
         }
         @media (max-width: 640px) {
-            .mobile-shell { padding-inline: .85rem; padding-top: .85rem; }
+            .mobile-shell { padding-inline: .85rem; padding-top: .55rem; }
             .mobile-card { border-radius: 1.35rem; }
             .mobile-action { min-height: 46px; border-radius: 1rem; }
             .mobile-business-card { min-height: 0; width: 100%; min-width: 0; }
@@ -151,14 +160,14 @@
         <div class="absolute inset-x-0 bottom-0 h-52 bg-gradient-to-t from-black via-black/70 to-transparent"></div>
     </div>
 
-    <main class="mobile-shell safe-bottom relative z-10 mx-auto flex min-h-screen w-full max-w-md flex-col px-4 py-5 sm:max-w-lg sm:px-6">
-        <header class="mb-4 flex items-center justify-between gap-3 sm:mb-6">
-            <a href="https://rustamoff.site" target="_blank" class="stable-button inline-flex items-center gap-3 rounded-2xl border border-champagne/20 bg-black/45 px-3 text-xs font-black text-champagne shadow-premium backdrop-blur transition hover:border-champagne/45 sm:px-4">
-                <img src="/assets/favicon.png" alt="Rustamoff logo" class="h-8 w-8 rounded-xl border border-champagne/30 bg-black object-cover">
+    <main class="mobile-shell safe-bottom relative z-10 mx-auto flex min-h-screen w-full max-w-md flex-col px-4 py-3 sm:max-w-lg sm:px-6 sm:py-5">
+        <header class="mb-2 flex items-center justify-between gap-2 sm:mb-4">
+            <a href="https://rustamoff.site" target="_blank" class="inline-flex min-h-10 items-center gap-2 rounded-xl border border-champagne/20 bg-black/45 px-2.5 text-[11px] font-black text-champagne shadow-premium backdrop-blur transition hover:border-champagne/45 sm:min-h-11 sm:px-3">
+                <img src="/assets/favicon.png" alt="Rustamoff logo" class="h-7 w-7 rounded-lg border border-champagne/30 bg-black object-cover">
                 <span>RUSTAMOFF</span>
             </a>
 
-            <button @click="shareCard()" class="stable-button w-11 rounded-2xl border border-champagne/20 bg-black/45 text-champagne backdrop-blur transition hover:border-champagne/45 active:scale-95 sm:w-12" aria-label="Profili paylaş">
+            <button @click="shareCard()" class="h-10 w-10 rounded-xl border border-champagne/20 bg-black/45 text-champagne backdrop-blur transition hover:border-champagne/45 active:scale-95 sm:h-11 sm:w-11" aria-label="Profili paylaş">
                 <i class="fa-solid fa-share-nodes text-[15px]"></i>
             </button>
         </header>
@@ -186,7 +195,7 @@
                             </div>
                         </div>
 
-                        <div class="flex flex-col items-center gap-5 py-6 sm:py-7">
+                        <div class="flex flex-col items-center gap-4 py-4 sm:py-6">
                             <div class="flex flex-col items-center">
                                 <div class="relative h-44 w-44 overflow-hidden rounded-full border-[4px] border-champagne bg-black shadow-gold sm:h-52 sm:w-52">
                                     <img :src="cardData.profile.avatar" :alt="cardData.profile.name" class="h-full w-full object-cover grayscale" @error="handleAvatarError($event)">
@@ -196,9 +205,9 @@
                             <div class="min-w-0 text-center">
                                 <p class="text-xs font-black uppercase tracking-[.28em] text-champagne/70" x-text="cardData.profile.title"></p>
                                 <h1 class="gold-text mt-2 text-4xl font-black leading-[.94] sm:text-5xl" x-text="cardData.profile.name"></h1>
-                                <button @click="downloadVCard()" class="mt-3 inline-flex min-h-10 items-center justify-center gap-2 rounded-full border border-champagne/35 bg-champagne px-4 text-xs font-black text-black shadow-gold transition active:scale-[.98]">
+                                <button @click="downloadVCard()" class="premium-hover mt-3 inline-flex min-h-10 items-center justify-center gap-2 rounded-full border border-champagne/35 bg-champagne px-4 text-xs font-black text-black shadow-gold transition active:scale-[.98]">
                                     <i class="fa-solid fa-mobile-screen-button text-[12px]"></i>
-                                    Kontakt
+                                    Kontakt yüklə
                                 </button>
                                 <p class="mt-2 text-sm font-black uppercase text-white/70">QA Engineer</p>
                                 <div class="gold-divider my-4"></div>
@@ -214,7 +223,7 @@
                                     </template>
                                     <div class="flex items-center justify-center gap-2.5">
                                         <template x-for="social in cardData.socials" :key="social.name">
-                                            <a :href="social.href" target="_blank" class="flex h-12 w-12 items-center justify-center rounded-2xl border border-champagne/45 bg-gradient-to-br from-white/12 to-black/35 text-champagne shadow-gold transition hover:-translate-y-0.5 hover:border-champagne hover:bg-white/10 active:scale-95" :aria-label="social.name">
+                                            <a :href="social.href" target="_blank" class="premium-hover flex h-12 w-12 items-center justify-center rounded-2xl border border-champagne/45 bg-gradient-to-br from-white/12 to-black/35 text-champagne shadow-gold transition hover:-translate-y-0.5 hover:border-champagne hover:bg-white/10 active:scale-95" :aria-label="social.name">
                                                 <i :class="social.icon" class="text-[18px]"></i>
                                             </a>
                                         </template>
@@ -225,6 +234,21 @@
                                         </span>
                                         <a href="https://rustamoff.site" target="_blank" class="truncate text-sm font-black text-white drop-shadow-[0_1px_8px_rgba(0,0,0,.65)] transition hover:text-champagne sm:text-base">rustamoff.site</a>
                                     </div>
+                                    <form @submit.prevent="sendContactMessage()" class="mt-1 flex items-center gap-2 rounded-2xl border border-champagne/20 bg-black/40 p-2 shadow-[0_16px_42px_-34px_rgba(216,192,138,.55)]">
+                                        <input
+                                            x-model="contactMessage"
+                                            :disabled="messageSending"
+                                            maxlength="900"
+                                            placeholder="Mesaj yaz..."
+                                            class="min-h-10 min-w-0 flex-1 rounded-xl bg-transparent px-2 text-sm font-bold text-white outline-none placeholder:text-white/35 disabled:opacity-60">
+                                        <button
+                                            type="submit"
+                                            :disabled="messageSending"
+                                            class="action-primary flex h-10 w-10 shrink-0 items-center justify-center rounded-xl text-xs transition active:scale-[.96] disabled:cursor-not-allowed disabled:opacity-60"
+                                            aria-label="Mesaj göndər">
+                                            <i :class="messageSending ? 'fa-solid fa-spinner fa-spin' : 'fa-solid fa-paper-plane'" class="text-[12px]"></i>
+                                        </button>
+                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -274,7 +298,7 @@
                     </template>
                 </div>
 
-                <button @click="showQrModal = true" class="mt-3 flex w-full items-center gap-3 rounded-2xl border border-champagne/20 bg-black/35 p-3 text-left transition hover:border-champagne/40" aria-label="QR kodu göstər">
+                <button @click="showQrModal = true" class="premium-hover mt-3 flex w-full items-center gap-3 rounded-2xl border border-champagne/20 bg-black/35 p-3 text-left transition hover:border-champagne/40" aria-label="QR kodu göstər">
                     <span class="flex h-20 w-20 shrink-0 items-center justify-center rounded-xl bg-white p-1.5 shadow-gold">
                         <img :src="qrCodeUrl(220)" alt="Ali Rustamov QR Code" class="h-full w-full rounded-lg object-contain">
                     </span>
@@ -322,7 +346,7 @@
 
                 <div class="grid gap-2.5">
                     <template x-for="social in cardData.socials" :key="social.name">
-                        <button @click="openLargeQr(social)" class="flex w-full items-center gap-3 rounded-2xl border border-champagne/20 bg-black/35 p-3 text-left transition hover:border-champagne/40" type="button">
+                        <button @click="openLargeQr(social)" class="premium-hover flex w-full items-center gap-3 rounded-2xl border border-champagne/20 bg-black/35 p-3 text-left transition hover:border-champagne/40" type="button">
                             <span class="flex h-20 w-20 shrink-0 items-center justify-center rounded-xl bg-white p-1.5 shadow-gold">
                                 <img :src="qrForUrl(social.href, 220)" :alt="`${social.name} QR Code`" class="h-full w-full rounded-lg object-contain">
                             </span>
